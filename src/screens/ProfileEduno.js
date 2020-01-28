@@ -502,8 +502,8 @@ const styles = StyleSheet.create({
         fontSize: 25
     },
     buttom: {
-        marginTop: 30,
-        marginBottom: 20,
+        marginTop: 20,
+        marginBottom: 10,
         padding: 10,
         backgroundColor: '#2C2D3F'
     },
@@ -513,14 +513,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#2C2D3F'
     },
     image: {
-        height: Dimensions.get('window').width * 15 / 100,
-        width: Dimensions.get('window').width * 4 / 10,
-        marginTop: 10,
-        resizeMode: 'center',
-        borderRadius: 120
+        width: Dimensions.get('window').width * 20 / 100,
+        height: Dimensions.get('window').width * 20 / 100,
+        // marginTop: 10,
+        resizeMode: 'contain',
+        borderRadius: Dimensions.get('window').width * 10 / 100,
+        // backgroundColor: 'red'
     },
     nickname: {
-        width: Dimensions.get('window').width * 45 / 100,
+        width: Dimensions.get('window').width * 50 / 100,
         height: 20,
         resizeMode: 'contain',
         color: '#BEF5FE',

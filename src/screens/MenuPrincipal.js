@@ -48,6 +48,10 @@ class MenuPrincipal extends Component {
         Alert.alert('Alerta', 'Em desenvolvimento')
     }
 
+    perfil = () => {
+        this.props.navigation.navigate('ProfileEduno')
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -92,6 +96,12 @@ class MenuPrincipal extends Component {
                         <Icon2 name='user' style={styles.icon} size={45} />
                     </TouchableOpacity>
                     <Text style={styles.description}>financeiro</Text>
+                </View>
+                <View style={styles.rowContainer}>
+                    <TouchableOpacity onPress={this.perfil}>
+                        <Icon2 name='user' style={styles.icon} size={45} />
+                    </TouchableOpacity>
+                    <Text style={styles.description}>perfil</Text>
                 </View>
             </View>
         )
