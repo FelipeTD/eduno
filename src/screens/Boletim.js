@@ -117,7 +117,7 @@ class Boletim extends Component {
                 </View>
                 <View style={styles.containerTitle}>
                     <View style={styles.rowContainer}>
-                        <Text style={styles.valorEtapa}>Valor da etapa: 10 pontos</Text>
+                        <Text style={styles.valorEtapa}>Valor da etapa: {this.props.valor}</Text>
                     </View>
                     <View style={styles.rowContainer}>
                         <Text style={styles.disciplina}>Disciplina</Text>
@@ -205,6 +205,7 @@ const mapStateToProps = ({etapa, userEduno}) => {
     return {
         numeroEtapa: etapa.numeroEtapa,
         descricao: etapa.descricao,
+        valor: etapa.valor,
         notas: etapa.notas,
         filhos: userEduno.filhos,
         token: userEduno.token,

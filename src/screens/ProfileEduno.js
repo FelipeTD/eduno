@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import { logoutEduno, atualizaID } from '../store/actions/userEduno'
 import { fetchNoticias } from '../store/actions/noticias'
@@ -549,6 +550,7 @@ const mapStateToProps = ({ userEduno, dadosProvas, dadosEventos, etapa, dadosTar
         eventos: dadosEventos.eventos,
         numeroEtapa: etapa.numeroEtapa,
         descricao: etapa.descricao,
+        valor: etapa.valor,
         notas: etapa.notas,
         numeroEtapaTarefa: dadosTarefas.numeroEtapaTarefa,
         data: dadosTarefas.data,

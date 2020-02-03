@@ -3,6 +3,7 @@ import { ATUALIZA_ETAPA, SET_ETAPA } from '../actions/actionTypes'
 const initialState = {
     numeroEtapa: 1,
     descricao: '1º etapa',
+    valor: 0,
     notas: []
 }
 
@@ -13,6 +14,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 numeroEtapa: action.payload.numeroEtapa,
                 descricao: action.payload.descricao,
+                valor: action.payload.valor,
                 notas: action.payload.notas
             }
         case SET_ETAPA:
@@ -20,6 +22,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 numeroEtapa: action.payload.numeroEtapa,
                 descricao: action.payload.descricao,
+                valor: action.payload.valor,
                 notas: action.payload.notas
             }
         default:

@@ -7,6 +7,7 @@ import {
   Dimensions, 
   TouchableOpacity, 
   TextInput,
+  Keyboard,
   Alert } 
 from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
@@ -43,6 +44,10 @@ class LoginEduno extends Component {
     // pwd: '',
     // empre: '',
     // device: '13423433',
+  }  
+
+  componentDidMount = () => {
+    Keyboard.dismiss()
   }
 
   componentDidUpdate = prevProps => {

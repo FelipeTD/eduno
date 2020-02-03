@@ -46,6 +46,7 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
             })
             .then(res => {
                 const rawNotas = res.data.notas
+                const valor = res.data.valor
                 const notas = []
                 for (let key in rawNotas) {
                     notas.push({
@@ -56,6 +57,7 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
                 const etapa = {
                     numeroEtapa: requestNotas.numeroEtapa,
                     descricao: requestNotas.descricao,
+                    valor: valor,
                     notas: notas
                 }
 
@@ -77,11 +79,12 @@ export const fetchNotas = (token, filhos, id) => {
     const codserie = filhos[id].codserie.toString()
     const codturma = filhos[id].codturma.toString()
     const ra = filhos[id].ra.toString()
+    const etapa_atual = filhos[id].etapAtual.toString()
 
     return dispatch => {
 
         axios.get(`http://eduno.com.br:4827/nota/${data}/${codcurso}/${codserie}/${codturma}
-                    /${ra}/1`, config)
+                    /${ra}/${etapa_atual}`, config)
             .catch(err => {
                 dispatch(setMessage({
                     title: 'Erro',
@@ -90,6 +93,11 @@ export const fetchNotas = (token, filhos, id) => {
             })
             .then(res => {
                 const rawNotas = res.data.notas
+                const valor = res.data.valor
+                // dispatch(setMessage({
+                //     title: 'Sucess',
+                //     text: valor_etapa.toString()
+                // }))
                 const notas = []
                 for (let key in rawNotas) {
                     notas.push({
@@ -98,8 +106,9 @@ export const fetchNotas = (token, filhos, id) => {
                     })
                 }
                 const etapa = {
-                    numeroEtapa: 1,
-                    descricao: '1º etapa',
+                    numeroEtapa: etapa_atual,
+                    descricao: `${etapa_atual} etapa`,
+                    valor: valor,
                     notas: notas
                 }
 

@@ -54,13 +54,13 @@ const noticiaRouterEduno = createStackNavigator({
     Noticias: { screen: Noticias, navigationOptions: { 
         title: 'Notícias',
         headerStyle: { 
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         } 
     } },
     NoticiaDetalhada: { screen: NoticiaDetalhada, navigationOptions: {
         title: 'Notícia Detalhada',
         headerStyle: { 
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         }
     }}
 })
@@ -69,13 +69,13 @@ const tarefaRouterEduno = createStackNavigator({
     Tarefas: { screen: Tarefas, navigationOptions: {
         title: 'Tarefas',
         headerStyle: { 
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         } 
     } },
     TarefaDetalhada: { screen: TarefaDetalhada, navigationOptions: { 
         title: 'Tarefa Detalhada',
         headerStyle: { 
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         } 
     } }
 })
@@ -89,7 +89,7 @@ const authRouterEduno = createStackNavigator({
     RecuperarSenha: { screen: RecuperarSenha, navigationOptions: { 
         title: 'Recuperar Senha',
         headerStyle: { 
-            backgroundColor: '#2C2D3F' 
+            backgroundColor: '#03888A' 
         } 
     } }
 })
@@ -114,7 +114,7 @@ const boletimRouterEduno = createStackNavigator({
     Boletim: { screen: Boletim, navigationOptions: {
         title: 'Boletim',
         headerStyle: { 
-            backgroundColor: '#2C2D3F' 
+            backgroundColor: '#03888A' 
         } 
     }}
 })
@@ -123,7 +123,7 @@ const horariosRouterEduno = createStackNavigator({
     Horarios: { screen: Horarios, navigationOptions: {
         title: 'Horários',
         headerStyle: {
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         }
     }}
 })
@@ -132,7 +132,7 @@ const provasRouterEduno = createStackNavigator({
     Provas: { screen: Provas, navigationOptions: {
         title: 'Provas',
         headerStyle: {
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         }
     }}
 })
@@ -141,7 +141,7 @@ const eventosRouterEduno = createStackNavigator({
     Eventos: { screen: Eventos, navigationOptions: {
         title: 'Eventos',
         headerStyle: {
-            backgroundColor: '#2C2D3F'
+            backgroundColor: '#03888A'
         }
     }}
 })

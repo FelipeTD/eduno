@@ -93,7 +93,7 @@ class MenuPrincipal extends Component {
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.financeiro}>
-                        <Icon2 name='user' style={styles.icon} size={45} />
+                        <Icon2 name='dollar' style={styles.icon} size={45} />
                     </TouchableOpacity>
                     <Text style={styles.description}>financeiro</Text>
                 </View>
