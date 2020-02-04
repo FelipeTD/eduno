@@ -91,6 +91,7 @@ class Noticias extends Component {
                     data={this.state.noticias}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) => 
+                    item.id !== 1 ?
                     <View style={styles.container}>
                         <View style={styles.rowContainer2}>
                             <Image style={styles.imageSecundario} source={item.image} />
@@ -110,7 +111,7 @@ class Noticias extends Component {
                                 <Text style={styles.linkSecundario}>Leia mais</Text>
                             </TouchableOpacity>
                         </View>
-                    </View> } 
+                    </View> : null }
                 />
             </View>
         )

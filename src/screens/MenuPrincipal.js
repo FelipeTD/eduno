@@ -59,49 +59,65 @@ class MenuPrincipal extends Component {
                     <TouchableOpacity onPress={this.boletim}>
                         <Icon name='boletim' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>boletim</Text>
+                    <TouchableOpacity onPress={this.boletim}>
+                        <Text style={styles.description}>boletim</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.provas}>
                         <Icon name='provas' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>provas</Text>
+                    <TouchableOpacity onPress={this.provas}>
+                        <Text style={styles.description}>provas</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.noticias}>
                         <Icon name='news' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>notícias</Text>
+                    <TouchableOpacity onPress={this.noticias}>
+                        <Text style={styles.description}>notícias</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.horarios}>
                         <Icon name='calendário' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>horários</Text>
+                    <TouchableOpacity onPress={this.horarios}>
+                        <Text style={styles.description}>horários</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.tarefas}>
                         <Icon name='tarefas' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>tarefas</Text>
+                    <TouchableOpacity onPress={this.tarefas}>
+                        <Text style={styles.description}>tarefas</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.eventos}>
                         <Icon name='eventos' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>eventos</Text>
+                    <TouchableOpacity onPress={this.eventos}>
+                        <Text style={styles.description}>eventos</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.financeiro}>
                         <Icon2 name='dollar' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>financeiro</Text>
+                    <TouchableOpacity onPress={this.financeiro}>
+                        <Text style={styles.description}>financeiro</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowContainer}>
                     <TouchableOpacity onPress={this.perfil}>
                         <Icon2 name='user' style={styles.icon} size={45} />
                     </TouchableOpacity>
-                    <Text style={styles.description}>perfil</Text>
+                    <TouchableOpacity onPress={this.perfil}>
+                        <Text style={styles.description}>perfil</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
