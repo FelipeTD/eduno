@@ -5,9 +5,7 @@ import {
     applyMiddleware 
 } from 'redux'
 import thunk from 'redux-thunk'
-import userReducer from './reducers/user'
 import userEdunoReducer from './reducers/userEduno'
-import postsReducer from './reducers/posts'
 import etapaReducer from './reducers/boletim'
 import tarefaReducer from './reducers/tarefa'
 import horariosReducer from './reducers/horarios'
@@ -20,8 +18,6 @@ import tarefaDetalhadaReducer from './reducers/tarefaDetalhada'
 import noticiaDetalhadaReducer from './reducers/noticiaDetalhada'
 
 const reducers = combineReducers({
-    user: userReducer,
-    posts: postsReducer,
     userEduno: userEdunoReducer,
     message: messageReducer,
     dadosInicio: inicioReducer,

@@ -24,30 +24,6 @@ import TarefaDetalhada from './screens/TarefaDetalhada'
 import NoticiaDetalhada from './screens/NoticiaDetalhada'
 import MenuPrincipal from './screens/MenuPrincipal'
 
-// Imports de exemplo
-import Feed from './screens/Feed'
-import AddPhoto from './screens/AddPhoto'
-import Profile from './screens/Profile'
-import Login from './screens/Login'
-import Register from './screens/Register'
-
-// Parte de exemplo
-/*
-const authRouter = createStackNavigator({
-    Login: { screen: Login, navigationOptions: { title: 'Login' } },
-    Register: { screen: Register, navigationOptions: { title: 'Register' } }
-}, {
-    initialRouteName: 'Login'
-})
-
-const loginOrProfileRouter = createSwitchNavigator({
-    Profile: Profile,
-    Auth: authRouter
-}, {
-    initialRouteName: 'Auth'
-})
-*/
-
 // Parte Principal
 
 const noticiaRouterEduno = createStackNavigator({
@@ -258,37 +234,6 @@ const MenuRoutes = {
                 <Icon name='provas' size={15} color={tintColor} />
         }
     }
-    
-    //Chamadas de exemplo
-    /*
-    AddPhoto: {
-        name: 'Adicionar Foto',
-        screen: AddPhoto,
-        navigationOptions: {
-            title: 'Adicionar Foto',
-            tabBarIcon: ({ tintColor }) =>
-                <Icon name='camera' size={15} color={tintColor} />
-        }
-    },
-    Profile: {
-        name: 'Perfil',
-        screen: loginOrProfileRouter,
-        navigationOptions: {
-            title: 'Perfil',
-            tabBarIcon: ({ tintColor }) =>
-                <Icon name='user' size={15} color={tintColor} />
-        }
-    },
-    Feed: {
-        name: 'Home',
-        screen: Feed,
-        navigationOptions: {
-            title: 'Home',
-            tabBarIcon: ({ tintColor }) => 
-                <Icon name='home' size={15} color={tintColor} />
-        }
-    },
-    */
 }
 
 const MenuConfig = {
