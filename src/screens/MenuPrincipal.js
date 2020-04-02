@@ -16,10 +16,6 @@ const Icon = createIconSetFromFontello(fontelloConfig)
 
 class MenuPrincipal extends Component {
 
-    atualizaSetaEsquerda = async () => {
-        Alert.alert('Minha mensagem', 'Tortora')
-    }
-
     boletim = () => {
         this.props.navigation.navigate('Boletim')
     }

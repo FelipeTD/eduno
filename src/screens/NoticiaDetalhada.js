@@ -16,10 +16,10 @@ class NoticiaDetalhada extends Component {
 
     formataData(data) {
         if (data !== null) {
-            const ano = data.toString().substring(0, 4);
-            const mes = data.toString().substring(5, 7);
-            const dia = data.toString().substring(8, 10);
-            return dia + '/' + mes + '/' + ano;
+            const ano = data.toString().substring(0, 4)
+            const mes = data.toString().substring(5, 7)
+            const dia = data.toString().substring(8, 10)
+            return dia + '/' + mes + '/' + ano
         }
     }
 
