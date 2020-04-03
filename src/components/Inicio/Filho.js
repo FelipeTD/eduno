@@ -4,12 +4,10 @@ import {
     View,
     Dimensions,
     Text,
-    Image,
-    Alert
+    Image
 } from 'react-native'
 
 class Filho extends Component {
-
     render() {
         return (
             <View style={styles.container}>

@@ -5,35 +5,16 @@ import {
     Dimensions,
     Text
 } from 'react-native'
+import { formataProfessor, formataHora } from '../../functions/formatador'
 
 class Horario extends Component {
-
-    formata_professor(professor) {
-        const nomes = professor.toString().split(" ")
-        let nome_formatado = nomes[0]
-
-        return nome_formatado
-    }
-
-    formata_hora(hora)  {
-        const caracteres = hora.toString().split("")
-        let hora_formatada = ''
-        if (hora < 1000) {
-            hora_formatada = '0' + caracteres[0] + ':' + caracteres[1] + caracteres[2] 
-        } else {
-            hora_formatada = caracteres[0] + caracteres[1] + ':' + caracteres[2] + caracteres[3]
-        }
-
-        return hora_formatada
-    }
-
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.rowContainer}>
                     <Text style={styles.disciplina}>{this.props.disciplina}</Text>
-                    <Text style={styles.horario}>{this.formata_hora(this.props.hoarario_inicio)}</Text>
-                    <Text style={styles.professor}>{this.formata_professor(this.props.professor)}</Text>
+                    <Text style={styles.horario}>{formataHora(this.props.hoarario_inicio)}</Text>
+                    <Text style={styles.professor}>{formataProfessor(this.props.professor)}</Text>
                 </View>
             </View>
         )
@@ -69,7 +50,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
-        //paddingLeft: 10,
         paddingBottom: 10
     },
     professor: {
@@ -78,7 +58,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
-        //paddingLeft: 10,
         paddingBottom: 10
     }
 })

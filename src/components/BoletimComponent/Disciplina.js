@@ -5,24 +5,14 @@ import {
     Dimensions,
     Text
 } from 'react-native'
+import { formataDisciplina } from '../../functions/formatador'
 
 class Disciplina extends Component {
-
-    formataDisciplina(disciplina) {
-        if (disciplina.toString().length >= 11) {
-            return disciplina.toString().substring(0, 11) + '.'
-        } else {
-            return disciplina.toString()
-        }
-    }
-
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.rowContainer}>
-                    <Text style={styles.disciplina}>
-                        {this.formataDisciplina(this.props.disciplina)}
-                    </Text>
+                    <Text style={styles.disciplina}>{formataDisciplina(this.props.disciplina)}</Text>
                     <Text style={styles.notas}>{this.props.nota}</Text>
                     <Text style={styles.faltas}>{this.props.faltas}</Text>
                 </View>
