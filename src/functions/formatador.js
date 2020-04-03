@@ -1,0 +1,14 @@
+export const formataDisciplina = disciplina => {
+    return disciplina.toString().length >= 11 ? disciplina.toString().substring(0, 11) + '.' 
+        : disciplina.toString()
+}
+
+export const formataProfessor = professor => {
+    return professor.toString().split(" ")[0]
+}
+
+export const formataHora = hora => {
+    const caracteres = hora.toString().split("")
+    return hora < 1000 ? '0' + caracteres[0] + ':' + caracteres[1] + caracteres[2] 
+        : caracteres[0] + caracteres[1] + ':' + caracteres[2] + caracteres[3]
+}
