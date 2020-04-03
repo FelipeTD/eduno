@@ -9,10 +9,10 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native'
-import Header from '../components/Header'
 import Horario from '../components/Horarios/Horario'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { fetchHorarios, refreshHorarios } from '../store/actions/horarios'
+import { diasDaSemana } from '../Enums/diasDaSemana'
 
 class Horarios extends Component {
 
@@ -20,8 +20,7 @@ class Horarios extends Component {
         identificador: this.props.id
     }
 
-    atualizaSetaDireita = async () => {
-
+    atualizaSetaDireita = () => {
         if (this.props.dia == 1) {
             this.props.dia = 2
         }
@@ -29,17 +28,7 @@ class Horarios extends Component {
             this.props.dia = 1
         }
         this.props.dia = this.props.dia + 1
-        if (this.props.dia == 2) {
-            this.props.diaDaSemana = 'Segunda'
-        } else if (this.props.dia == 3) {
-            this.props.diaDaSemana = 'Terça'
-        } else if (this.props.dia == 4) {
-            this.props.diaDaSemana = 'Quarta'
-        } else if (this.props.dia == 5) {
-            this.props.diaDaSemana = 'Quinta'
-        } else if (this.props.dia == 6) {
-            this.props.diaDaSemana = 'Sexta'
-        }
+        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
         this.props.onAtualizaHorarios({
             dia: this.props.dia,
             diaDaSemana: this.props.diaDaSemana,
@@ -47,23 +36,12 @@ class Horarios extends Component {
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    atualizaSetaEsquerda = async () => {
-
+    atualizaSetaEsquerda = () => {
         if (this.props.dia == 2 || this.props.dia == 1) {
             this.props.dia = 7
         }
         this.props.dia = this.props.dia - 1
-        if (this.props.dia == 2) {
-            this.props.diaDaSemana = 'Segunda'
-        } else if (this.props.dia == 3) {
-            this.props.diaDaSemana = 'Terça'
-        } else if (this.props.dia == 4) {
-            this.props.diaDaSemana = 'Quarta'
-        } else if (this.props.dia == 5) {
-            this.props.diaDaSemana = 'Quinta'
-        } else if (this.props.dia == 6) {
-            this.props.diaDaSemana = 'Sexta'
-        }
+        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
         this.props.onAtualizaHorarios({
             dia: this.props.dia,
             diaDaSemana: this.props.diaDaSemana,
@@ -168,8 +146,6 @@ const styles = StyleSheet.create({
     containerTitle: {
         marginTop: Platform.OS === 'ios' ? 20 : 0,
         padding: 10,
-        //borderBottomWidth: 1,
-        //borderColor: '#BBB',
         width: '100%'
     }
 })
