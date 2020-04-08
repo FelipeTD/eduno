@@ -19,33 +19,19 @@ class Boletim extends Component {
         identificador: this.props.id
     }
 
-    atualizaSetaDireita = async () => {
+    atualizaSetaDireita = () => {
         if (this.props.filhos[this.props.id].numEtapas == 4) {
             if (this.props.numeroEtapa == 4) {
                 this.props.numeroEtapa = 0
             }
-            this.props.numeroEtapa = this.props.numeroEtapa + 1
-            if (this.props.numeroEtapa == 1) {
-                this.props.descricao = '1º etapa'
-            } else if (this.props.numeroEtapa == 2) {
-                this.props.descricao = '2º etapa'
-            } else if (this.props.numeroEtapa == 3) {
-                this.props.descricao = '3º etapa'
-            } else if (this.props.numeroEtapa == 4) {
-                this.props.descricao = '4º etapa'
-            }
+            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
+            this.props.descricao = this.props.numeroEtapa + 'º etapa'
         } else if (this.props.filhos[this.props.id].numEtapas == 3) {
             if (this.props.numeroEtapa == 3) {
                 this.props.numeroEtapa = 0
             }
-            this.props.numeroEtapa = this.props.numeroEtapa + 1
-            if (this.props.numeroEtapa == 1) {
-                this.props.descricao = '1º etapa'
-            } else if (this.props.numeroEtapa == 2) {
-                this.props.descricao = '2º etapa'
-            } else if (this.props.numeroEtapa == 3) {
-                this.props.descricao = '3º etapa'
-            }
+            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
+            this.props.descricao = this.props.numeroEtapa + 'º etapa'
         }
         this.props.onAtualizaEtapa({
             numeroEtapa: this.props.numeroEtapa,
@@ -54,33 +40,19 @@ class Boletim extends Component {
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    atualizaSetaEsquerda = async () => {
+    atualizaSetaEsquerda = () => {
         if (this.props.filhos[this.props.id].numEtapas == 4) {
             if (this.props.numeroEtapa == 1) {
                 this.props.numeroEtapa = 5
             }
-            this.props.numeroEtapa = this.props.numeroEtapa - 1
-            if (this.props.numeroEtapa == 1) {
-                this.props.descricao = '1º etapa'
-            } else if (this.props.numeroEtapa == 2) {
-                this.props.descricao = '2º etapa'
-            } else if (this.props.numeroEtapa == 3) {
-                this.props.descricao = '3º etapa'
-            } else if (this.props.numeroEtapa == 4) {
-                this.props.descricao = '4º etapa'
-            }
+            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
+            this.props.descricao = this.props.numeroEtapa + 'º etapa'
         } else if (this.props.filhos[this.props.id].numEtapas == 3) {
             if (this.props.numeroEtapa == 1) {
                 this.props.numeroEtapa = 4
             }
-            this.props.numeroEtapa = this.props.numeroEtapa - 1
-            if (this.props.numeroEtapa == 1) {
-                this.props.descricao = '1º etapa'
-            } else if (this.props.numeroEtapa == 2) {
-                this.props.descricao = '2º etapa'
-            } else if (this.props.numeroEtapa == 3) {
-                this.props.descricao = '3º etapa'
-            }
+            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
+            this.props.descricao = this.props.numeroEtapa + 'º etapa'
         }
         this.props.onAtualizaEtapa({
             numeroEtapa: this.props.numeroEtapa,

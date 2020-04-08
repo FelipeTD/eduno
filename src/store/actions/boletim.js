@@ -60,8 +60,6 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
                     valor: valor,
                     notas: notas
                 }
-
-                // dispatch(setPosts(posts.reverse()))
                 dispatch(atualizaEtapa(etapa))
             })
     }
