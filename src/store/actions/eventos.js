@@ -55,6 +55,13 @@ export const fetchEventos = (token, filhos, id) => {
                 }
             })
             .then(res => {
+                res.data.notas.push({
+                        "disciplina": "2020-04-11T03:00:00.000Z",
+                        "tipo": "Recesso",
+                        "titulo": "RECESSO DE CARNAVAL",
+                        "publico": "Escola",
+                        "detalhe": null
+                    })
                 const rawEventos = res.data.notas
                 const eventos = []
                 for (let key in rawEventos) {
@@ -64,6 +71,11 @@ export const fetchEventos = (token, filhos, id) => {
                     })
                 }
 
+                // dispatch(setMessage({
+                //     title: 'Sucess',
+                //     text: eventos[x].toString()
+                // }))
+
                 let eventosMensais = []
 
                 for (let x = 0; x < eventos.length; x++) {
@@ -72,9 +84,17 @@ export const fetchEventos = (token, filhos, id) => {
                     }
                 }
 
+                // eventosMensains.push({
+                //     id: 10,
+                //     disciplina: "2020-04-11T03:00:00.000Z",
+                //     tipo: "Feriado",
+                //     titulo: "Feriado do filipe",
+                //     publico: "Trabalho",
+                //     detalhe: "Minha descrição"
+                // })
+
                 const datas = []
                 if (eventosMensais.length > 0) {
-
                     for (let x = 0; x < eventosMensais.length; x++) {
                         datas.push({
                             data: eventosMensais[x].disciplina.toString().substring(0,10)

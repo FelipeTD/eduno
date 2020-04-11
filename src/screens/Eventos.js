@@ -11,7 +11,8 @@ import {
   FlatList
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { localeDate } from '../Enums/dateUtil'
+import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
+import { formataData } from '../functions/formatador'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -29,7 +30,8 @@ class Eventos extends Component {
     this.onDayPress = this.onDayPress.bind(this);
   }
 
-  diaPadrao(dataPadrao) {
+  // Carrega informações do dia atual quando a tela é carregada
+  carregarInformacoesDiaAtual(dataPadrao) {
     this.state.eventos = []
 
     const dataClicada = dataPadrao.getDate().toString() + 
@@ -54,13 +56,11 @@ class Eventos extends Component {
           publico: this.props.eventos[x].publico,
           detalhe: this.props.eventos[x].detalhe
         })
+        // this.state.eventos.push(this.props.eventos[x])
       }
     }
 
-    const semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-    const dataSemana = dataPadrao
-
-    this.state.diaDaSemanaReduzido = semana[dataSemana.getDay()].toString()
+    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[dataPadrao.getDay()].toString()
     this.state.diaDoMes = dataPadrao.getDate().toString()
   }
 
@@ -97,24 +97,13 @@ class Eventos extends Component {
       }
     }
 
-    const semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
     const dataSemana = new Date(day.dateString.toString())
-
-    this.state.diaDaSemanaReduzido = semana[dataSemana.getDay()].toString()
+    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[dataSemana.getDay()].toString()
     this.state.diaDoMes = data.getDate().toString()
 
     this.setState({
       selected: day.dateString
     });
-  }
-
-  formataData(data) {
-      if (data !== null) {
-          const ano = data.toString().substring(0, 4);
-          const mes = data.toString().substring(5, 7);
-          const dia = data.toString().substring(8, 10);
-          return dia + '/' + mes + '/' + ano;
-      }
   }
 
   carregaLista() {
@@ -126,9 +115,7 @@ class Eventos extends Component {
           renderItem={({ item }) => 
             <View style={styles.lista}>
               <Text style={styles.linha}>{item.tipo} - {item.publico}</Text>
-              <Text style={styles.linha}>
-                {item.titulo} - {this.formataData(item.disciplina)}
-              </Text>
+              <Text style={styles.linha}>{item.titulo} - {formataData(item.disciplina)}</Text>
               <Text style={styles.detalhe}>{item.detalhe}</Text>
             </View>
           } 
@@ -416,7 +403,7 @@ class Eventos extends Component {
 
   componentDidMount = () => {
     this.props.onFetchEventos(this.props.token.toString(), this.props.filhos, this.props.id)
-    this.diaPadrao(new Date())
+    this.carregarInformacoesDiaAtual(new Date())
   }
 
   render() {

@@ -12,3 +12,10 @@ export const formataHora = hora => {
     return hora < 1000 ? '0' + caracteres[0] + ':' + caracteres[1] + caracteres[2] 
         : caracteres[0] + caracteres[1] + ':' + caracteres[2] + caracteres[3]
 }
+
+export const formataData = data => {
+    return data !== null ? 
+        data.toString().substring(0, 4) + '/' + 
+        data.toString().substring(5, 7) + '/' + 
+        data.toString().substring(8, 10) : data
+}
