@@ -11,20 +11,12 @@ import {
   FlatList
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { localeDate } from '../Enums/dateUtil'
 
-LocaleConfig.locales['pt-br'] = {
-  monthNames: 
-    ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto',
-     'Setembro','Outubro','Novembro','Dezembro'],
-  monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-  dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-  dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-  today: 'Hoje'
-};
-LocaleConfig.defaultLocale = 'pt-br';
+LocaleConfig.locales['pt-br'] = localeDate
+LocaleConfig.defaultLocale = 'pt-br'
 
 class Eventos extends Component {
-
   state = {
     diaDaSemanaReduzido: '',
     diaDoMes: '',
@@ -34,26 +26,23 @@ class Eventos extends Component {
 
   constructor(props) {
     super(props);
-    // this.props = {};
     this.onDayPress = this.onDayPress.bind(this);
   }
 
   diaPadrao(dataPadrao) {
-
     this.state.eventos = []
 
-    dataClicada = dataPadrao.getDate().toString() + 
+    const dataClicada = dataPadrao.getDate().toString() + 
                   dataPadrao.getMonth().toString() + 
                   dataPadrao.getFullYear().toString()
 
     for (let x = 0; x < this.props.eventos.length; x++) {
-
       let dataFormatada = this.props.eventos[x].disciplina.toString().substring(0,10)
       
       let date = new Date(dataFormatada)
       date.setDate(date.getDate() + 1)
 
-      dataRetorno = date.getDate().toString() + 
+      const dataRetorno = date.getDate().toString() + 
                   date.getMonth().toString() + 
                   date.getFullYear().toString()
 
@@ -73,7 +62,6 @@ class Eventos extends Component {
 
     this.state.diaDaSemanaReduzido = semana[dataSemana.getDay()].toString()
     this.state.diaDoMes = dataPadrao.getDate().toString()
-
   }
 
   onDayPress(day) {
@@ -83,7 +71,7 @@ class Eventos extends Component {
     let data = new Date(day.dateString.toString())
     data.setDate(data.getDate() + 1)
 
-    dataClicada = data.getDate().toString() + 
+    const dataClicada = data.getDate().toString() + 
                   data.getMonth().toString() + 
                   data.getFullYear().toString()
 
@@ -94,7 +82,7 @@ class Eventos extends Component {
       let date = new Date(dataFormatada)
       date.setDate(date.getDate() + 1)
 
-      dataRetorno = date.getDate().toString() + 
+      const dataRetorno = date.getDate().toString() + 
                   date.getMonth().toString() + 
                   date.getFullYear().toString()
 
@@ -156,7 +144,6 @@ class Eventos extends Component {
   }
 
   datasUteis() {
-
     let retorno = {}
     const constante = {selected: true, marked: true, selectedColor: 'blue'}
     let tamanho = 0
