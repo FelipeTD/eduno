@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
-import { formataData } from '../functions/formatador'
+import { formataData, formateDate } from '../functions/formatador'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -34,28 +34,13 @@ class Eventos extends Component {
   carregarInformacoesDiaAtual(dataPadrao) {
     this.state.eventos = []
 
-    const dataClicada = dataPadrao.getDate().toString() + 
-                  dataPadrao.getMonth().toString() + 
-                  dataPadrao.getFullYear().toString()
-
     for (let x = 0; x < this.props.eventos.length; x++) {
       let dataFormatada = this.props.eventos[x].disciplina.toString().substring(0,10)
       
-      let date = new Date(dataFormatada)
-      date.setDate(date.getDate() + 1)
+      let dataRetorno = new Date(dataFormatada)
+      dataRetorno.setDate(dataRetorno.getDate() + 1)
 
-      const dataRetorno = date.getDate().toString() + 
-                  date.getMonth().toString() + 
-                  date.getFullYear().toString()
-
-      if (dataClicada === dataRetorno) {
-        // this.state.eventos.push({
-        //   disciplina: this.props.eventos[x].disciplina,
-        //   tipo: this.props.eventos[x].tipo,
-        //   titulo: this.props.eventos[x].titulo,
-        //   publico: this.props.eventos[x].publico,
-        //   detalhe: this.props.eventos[x].detalhe
-        // })
+      if (formateDate(dataPadrao) === formateDate(dataRetorno)) {
         this.state.eventos.push(this.props.eventos[x])
       }
     }

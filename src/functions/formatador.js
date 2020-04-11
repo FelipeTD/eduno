@@ -19,3 +19,10 @@ export const formataData = data => {
         data.toString().substring(5, 7) + '/' + 
         data.toString().substring(8, 10) : data
 }
+
+export const formateDate = data => {
+    return data !== null ?
+        data.getDate().toString() + 
+        data.getMonth().toString() + 
+        data.getFullYear().toString() : data
+}
