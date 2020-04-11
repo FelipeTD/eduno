@@ -49,14 +49,14 @@ class Eventos extends Component {
                   date.getFullYear().toString()
 
       if (dataClicada === dataRetorno) {
-        this.state.eventos.push({
-          disciplina: this.props.eventos[x].disciplina,
-          tipo: this.props.eventos[x].tipo,
-          titulo: this.props.eventos[x].titulo,
-          publico: this.props.eventos[x].publico,
-          detalhe: this.props.eventos[x].detalhe
-        })
-        // this.state.eventos.push(this.props.eventos[x])
+        // this.state.eventos.push({
+        //   disciplina: this.props.eventos[x].disciplina,
+        //   tipo: this.props.eventos[x].tipo,
+        //   titulo: this.props.eventos[x].titulo,
+        //   publico: this.props.eventos[x].publico,
+        //   detalhe: this.props.eventos[x].detalhe
+        // })
+        this.state.eventos.push(this.props.eventos[x])
       }
     }
 
