@@ -12,6 +12,7 @@ import {
     Image,
     Alert
 } from 'react-native'
+import { formataData } from '../functions/formatador'
 
 class Noticias extends Component {
 
@@ -35,15 +36,6 @@ class Noticias extends Component {
             titulo: this.props.noticias[2].titul,
             data: this.props.noticias[2].atual
         }]
-    }
-
-    formataData(data) {
-        if (data !== null) {
-            const ano = data.toString().substring(0, 4);
-            const mes = data.toString().substring(5, 7);
-            const dia = data.toString().substring(8, 10);
-            return dia + '/' + mes + '/' + ano;
-        }
     }
 
     carregaNoticiaDetalhada(ident, titul, sinop, atual, image) {
@@ -74,14 +66,14 @@ class Noticias extends Component {
                     <Text style={styles.title}>{this.props.noticias[0].titul}</Text>
                 </View>
                 <View style={styles.rowContainerLast}>
-                    <Text style={styles.data}>{this.formataData(this.props.noticias[0].atual)}</Text>
+                    <Text style={styles.data}>{formataData(this.props.noticias[0].atual)}</Text>
                     <TouchableOpacity 
                         onPress={() => 
                         {this.carregaNoticiaDetalhada(
                             this.state.noticias[0].id,
                             this.props.noticias[0].titul,
                             this.props.noticias[0].sinop,
-                            this.formataData(this.props.noticias[0].atual),
+                            formataData(this.props.noticias[0].atual),
                             this.state.noticias[0].image
                         )}}>
                         <Text style={styles.link}>Leia mais</Text>
@@ -98,14 +90,14 @@ class Noticias extends Component {
                             <Text style={styles.titleSecundario}>{item.titulo}</Text>
                         </View>
                         <View style={styles.rowContainerSecundario}>
-                            <Text style={styles.dataSecundario}>{this.formataData(item.data)}</Text>
+                            <Text style={styles.dataSecundario}>{formataData(item.data)}</Text>
                             <TouchableOpacity 
                                 onPress={() => 
                                 {this.carregaNoticiaDetalhada(
                                     item.id,
                                     item.titulo,
                                     item.description,
-                                    this.formataData(item.data),
+                                    formataData(item.data),
                                     item.image
                                 )}}>
                                 <Text style={styles.linkSecundario}>Leia mais</Text>

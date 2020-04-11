@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
-import { formataData, formateDate } from '../functions/formatador'
+import { formataData } from '../functions/formatador'
+import { filtrarEventos } from '../functions/eventosFunction/filtrarEventos'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -30,27 +31,13 @@ class Eventos extends Component {
     this.onDayPress = this.onDayPress.bind(this);
   }
 
-  // Carrega informações do dia atual quando a tela é carregada
   carregarInformacoesDiaAtual(dataPadrao) {
-    this.state.eventos = []
-
-    for (let x = 0; x < this.props.eventos.length; x++) {
-      let dataFormatada = this.props.eventos[x].disciplina.toString().substring(0,10)
-      
-      let dataRetorno = new Date(dataFormatada)
-      dataRetorno.setDate(dataRetorno.getDate() + 1)
-
-      if (formateDate(dataPadrao) === formateDate(dataRetorno)) {
-        this.state.eventos.push(this.props.eventos[x])
-      }
-    }
-
-    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[dataPadrao.getDay()].toString()
+    this.state.eventos.push(filtrarEventos(this.props.eventos, dataPadrao))
+    this.state.diaDaSemanaReduzido = localeDate.dayNamesShort[dataPadrao.getDay()].toString()
     this.state.diaDoMes = dataPadrao.getDate().toString()
   }
 
   onDayPress(day) {
-
     this.state.eventos = []
 
     let data = new Date(day.dateString.toString())

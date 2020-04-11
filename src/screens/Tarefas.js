@@ -12,6 +12,7 @@ import {
     Alert
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { formataData } from '../functions/formatador'
 
 class Tarefas extends Component {
 
@@ -59,15 +60,6 @@ class Tarefas extends Component {
             data: this.props.data,
             tarefas: []
         }, this.props.filhos, this.props.token.toString(), this.props.id)
-    }
-
-    formataData(data) {
-        if (data !== null) {
-            const ano = data.toString().substring(0, 4);
-            const mes = data.toString().substring(5, 7);
-            const dia = data.toString().substring(8, 10);
-            return dia + '/' + mes + '/' + ano;
-        }
     }
 
     carregaTarefaDetalhada(disciplina, titulo, data_entrega, detalhe) {
@@ -127,7 +119,7 @@ class Tarefas extends Component {
                                         {this.carregaTarefaDetalhada(
                                             item.disciplina,
                                             item.titulo,
-                                            this.formataData(item.data_entrega),
+                                            formataData(item.data_entrega),
                                             item.detalhe
                                         )}}>
                                         <Text style={styles.link}>Ver</Text>

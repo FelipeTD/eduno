@@ -11,17 +11,9 @@ import {
 } from 'react-native'
 import { fetchNoticiaDetalhada } from '../store/actions/noticiaDetalhada'
 import { connect } from 'react-redux'
+import { formataData } from '../functions/formatador'
 
 class NoticiaDetalhada extends Component {
-
-    formataData(data) {
-        if (data !== null) {
-            const ano = data.toString().substring(0, 4)
-            const mes = data.toString().substring(5, 7)
-            const dia = data.toString().substring(8, 10)
-            return dia + '/' + mes + '/' + ano
-        }
-    }
 
     formataImagem() {
         const base64 = 'data:image/png;base64,' + this.props.image
@@ -36,7 +28,7 @@ class NoticiaDetalhada extends Component {
                </View>
                <View style={styles.rowContainer}>
                     <Text style={styles.title}>
-                        {this.props.titul} - {this.formataData(this.props.atual)}
+                        {this.props.titul} - {formataData(this.props.atual)}
                     </Text>
                </View>
                <View style={styles.rowContainer}>

@@ -15,9 +15,9 @@ export const formataHora = hora => {
 
 export const formataData = data => {
     return data !== null ? 
-        data.toString().substring(0, 4) + '/' + 
+        data.toString().substring(8, 10) + '/' +
         data.toString().substring(5, 7) + '/' + 
-        data.toString().substring(8, 10) : data
+        data.toString().substring(0, 4) : data
 }
 
 export const formateDate = data => {
