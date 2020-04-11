@@ -1,5 +1,5 @@
 import { refreshHorarios } from '../store/actions/horarios'
-import { diasDaSemana } from '../Enums/diasDaSemana'
+import { diasDaSemana } from '../Enums/dateUtil'
 
 // Não está funcionando. Deixando para referência e tentar fazer funcionar futuramente
 export const atualizaSetaDireita = (dia, diaDaSemana, filhos, token, id) => {

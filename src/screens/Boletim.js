@@ -19,20 +19,8 @@ class Boletim extends Component {
         identificador: this.props.id
     }
 
-    atualizaSetaDireita = () => {
-        if (this.props.filhos[this.props.id].numEtapas == 4) {
-            if (this.props.numeroEtapa == 4) {
-                this.props.numeroEtapa = 0
-            }
-            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
-            this.props.descricao = this.props.numeroEtapa + 'º etapa'
-        } else if (this.props.filhos[this.props.id].numEtapas == 3) {
-            if (this.props.numeroEtapa == 3) {
-                this.props.numeroEtapa = 0
-            }
-            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
-            this.props.descricao = this.props.numeroEtapa + 'º etapa'
-        }
+    atualizarBoletim = () => {
+        this.props.descricao = this.props.numeroEtapa + 'º etapa'
         this.props.onAtualizaEtapa({
             numeroEtapa: this.props.numeroEtapa,
             descricao: this.props.descricao,
@@ -40,25 +28,23 @@ class Boletim extends Component {
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    atualizaSetaEsquerda = () => {
-        if (this.props.filhos[this.props.id].numEtapas == 4) {
-            if (this.props.numeroEtapa == 1) {
-                this.props.numeroEtapa = 5
-            }
-            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
-            this.props.descricao = this.props.numeroEtapa + 'º etapa'
-        } else if (this.props.filhos[this.props.id].numEtapas == 3) {
-            if (this.props.numeroEtapa == 1) {
-                this.props.numeroEtapa = 4
-            }
-            this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
-            this.props.descricao = this.props.numeroEtapa + 'º etapa'
+    atualizaSetaDireita = () => {
+        if ((this.props.filhos[this.props.id].numEtapas == 4 && this.props.numeroEtapa == 4)
+            || (this.props.filhos[this.props.id].numEtapas == 3 && this.props.numeroEtapa == 3)) {
+            this.props.numeroEtapa = 0
         }
-        this.props.onAtualizaEtapa({
-            numeroEtapa: this.props.numeroEtapa,
-            descricao: this.props.descricao,
-            notas: []
-        }, this.props.filhos, this.props.token.toString(), this.props.id)
+        this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
+        this.atualizarBoletim()
+    }
+
+    atualizaSetaEsquerda = () => {
+        if (this.props.filhos[this.props.id].numEtapas == 4 && this.props.numeroEtapa == 1) {
+            this.props.numeroEtapa = 5
+        } else if (this.props.filhos[this.props.id].numEtapas == 3 && this.props.numeroEtapa == 1) {
+            this.props.numeroEtapa = 4
+        }
+        this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
+        this.atualizarBoletim()
     }
 
     componentDidMount = () => {

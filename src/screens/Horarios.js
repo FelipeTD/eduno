@@ -12,13 +12,22 @@ import {
 import Horario from '../components/Horarios/Horario'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { fetchHorarios, refreshHorarios } from '../store/actions/horarios'
-import { diasDaSemana } from '../Enums/diasDaSemana'
+import { diasDaSemana } from '../Enums/dateUtil'
 
 class Horarios extends Component {
 
     state = {
         identificador: this.props.id
     }
+
+    atualizarHorarios = () => {
+        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
+        this.props.onAtualizaHorarios({
+            dia: this.props.dia,
+            diaDaSemana: this.props.diaDaSemana,
+            horarios: []
+        }, this.props.filhos, this.props.token.toString(), this.props.id)
+    } 
 
     atualizaSetaDireita = () => {
         if (this.props.dia == 1) {
@@ -28,12 +37,7 @@ class Horarios extends Component {
             this.props.dia = 1
         }
         this.props.dia = this.props.dia + 1
-        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
-        this.props.onAtualizaHorarios({
-            dia: this.props.dia,
-            diaDaSemana: this.props.diaDaSemana,
-            horarios: []
-        }, this.props.filhos, this.props.token.toString(), this.props.id)
+        this.atualizarHorarios()
     }
 
     atualizaSetaEsquerda = () => {
@@ -41,12 +45,7 @@ class Horarios extends Component {
             this.props.dia = 7
         }
         this.props.dia = this.props.dia - 1
-        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
-        this.props.onAtualizaHorarios({
-            dia: this.props.dia,
-            diaDaSemana: this.props.diaDaSemana,
-            horarios: []
-        }, this.props.filhos, this.props.token.toString(), this.props.id)
+        this.atualizarHorarios()
     }
 
     componentDidMount = () => {
