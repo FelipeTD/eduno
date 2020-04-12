@@ -10,8 +10,8 @@ export const filtrarEventos = (eventos, data) => {
                 return eventos[x]
             }
         }
-        return []
+        return null
     } else {
-        return []
+        return null
     }
 }

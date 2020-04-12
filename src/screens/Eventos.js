@@ -51,7 +51,7 @@ class Eventos extends Component {
   }
 
   carregaLista() {
-    if (this.state.eventos.length > 0) {
+    if (this.state.eventos[0] !== null) {
       return (
         <FlatList
           data={this.state.eventos}
