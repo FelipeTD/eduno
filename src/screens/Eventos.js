@@ -32,6 +32,7 @@ class Eventos extends Component {
   }
 
   carregarInformacoesDiaAtual(dataPadrao) {
+    this.state.eventos = []
     this.state.eventos.push(filtrarEventos(this.props.eventos, dataPadrao))
     this.state.diaDaSemanaReduzido = localeDate.dayNamesShort[dataPadrao.getDay()].toString()
     this.state.diaDoMes = dataPadrao.getDate().toString()
@@ -39,40 +40,11 @@ class Eventos extends Component {
 
   onDayPress(day) {
     this.state.eventos = []
-
     let data = new Date(day.dateString.toString())
+    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[data.getDay()].toString()
     data.setDate(data.getDate() + 1)
-
-    const dataClicada = data.getDate().toString() + 
-                  data.getMonth().toString() + 
-                  data.getFullYear().toString()
-
-    for (let x = 0; x < this.props.eventos.length; x++) {
-
-      let dataFormatada = this.props.eventos[x].disciplina.toString().substring(0,10)
-      
-      let date = new Date(dataFormatada)
-      date.setDate(date.getDate() + 1)
-
-      const dataRetorno = date.getDate().toString() + 
-                  date.getMonth().toString() + 
-                  date.getFullYear().toString()
-
-      if (dataClicada === dataRetorno) {
-        this.state.eventos.push({
-          disciplina: this.props.eventos[x].disciplina,
-          tipo: this.props.eventos[x].tipo,
-          titulo: this.props.eventos[x].titulo,
-          publico: this.props.eventos[x].publico,
-          detalhe: this.props.eventos[x].detalhe
-        })
-      }
-    }
-
-    const dataSemana = new Date(day.dateString.toString())
-    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[dataSemana.getDay()].toString()
+    this.state.eventos.push(filtrarEventos(this.props.eventos, data))
     this.state.diaDoMes = data.getDate().toString()
-
     this.setState({
       selected: day.dateString
     });
