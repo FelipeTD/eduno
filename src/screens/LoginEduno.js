@@ -7,47 +7,19 @@ import {
   Dimensions, 
   TouchableOpacity, 
   TextInput,
-  Keyboard,
-  Alert } 
+} 
 from 'react-native'
-import { Dropdown } from 'react-native-material-dropdown';
 import { connect } from 'react-redux'
 import { loginEduno } from '../store/actions/userEduno'
 import CryptoJS from 'react-native-crypto-js/CryptoJS'
+import { mockLogin } from '../Enums/login'
 
 class LoginEduno extends Component {
+  state = mockLogin[0]
 
-  state = {
-    // dados para teste
-    // Claudio 1 filho
-    // name: 'temporario',
-    // user: '814.528.456-20',
-    // pwd: '123465',
-    // empre: 'EBA',
-    // device: '13423433',
-    // Janio 2 filhos
-    name: 'temporario',
-    user: 'janio.kaizer@hotmail.com',
-    pwd: '703332',
-    empre: 'EBA',
-    device: '13423433',
-    // SADSON 1 filho
-    // name: 'temporario',
-    // user: 'SADSONVIANA@HOMAIL.COM',
-    // pwd: '914820',
-    // empre: 'EBA',
-    // device: '13423433',
-
-    // dados producao
-    // name: 'temporario',
-    // user: '',
-    // pwd: '',
-    // empre: '',
-    // device: '13423433',
-  }  
-
-  componentDidMount = () => {
-    Keyboard.dismiss()
+  login = () => {
+    this.state.pwd = CryptoJS.enc.Base64.stringify(CryptoJS.MD5(this.state.pwd)).toString()
+    this.props.onLoginEduno({ ...this.state })
   }
 
   componentDidUpdate = prevProps => {
@@ -56,31 +28,7 @@ class LoginEduno extends Component {
       }
   }
 
-  login = () => {
-      this.state.pwd = this.cryptografia(this.state.pwd)
-      this.props.onLoginEduno({ ...this.state })
-  }
-
-  cryptografia(senha) {
-      // Alert.alert('Sucesso', CryptoJS.enc.Base64.stringify(CryptoJS.MD5(senha)).toString())
-      return CryptoJS.enc.Base64.stringify(CryptoJS.MD5(senha)).toString()
-  }
-
   render() {
-
-    // let data = [{
-    //   value: 'EBA',
-    // }, {
-    //   value: 'ABE',
-    // }, {
-    //   value: 'BEA',
-    // }];
-
-    // <Dropdown label='Empresa' 
-    // data={data} 
-    // value={this.state.empresa}
-    // onChangeText={empresa => this.setState({ empresa })} />
-
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
