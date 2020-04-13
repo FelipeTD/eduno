@@ -1,6 +1,6 @@
 import { formateDate } from './formatador'
 
-export const datasUteis = (datas, selected) => {
+export const formatarDatas = (datas, selected) => {
     let retorno = {}
     const constante = {selected: true, marked: true, selectedColor: 'blue'}
     let tamanho = 0
@@ -17,7 +17,7 @@ export const datasUteis = (datas, selected) => {
     return retorno;
 }
 
-export const filtrarEventos = (eventos, data) => {
+export const filtrarDatas = (eventos, data) => {
     if (eventos.length > 0) {
         for (let x = 0; x < eventos.length; x++) {
             let dataFormatada = eventos[x].disciplina.toString().substring(0,10)

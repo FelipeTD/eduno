@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { localeDate } from '../Enums/dateUtil'
-import { datasUteis } from '../functions/eventosFunctions'
+import { formatarDatas } from '../functions/calendarFunctions'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -183,7 +183,7 @@ class Provas extends Component {
           onPressArrowRight={addMonth => this.setaDireita(addMonth, this.props.mes, this.props.ano)}
           style={styles.calendar}
           hideExtraDays
-          markedDates= { datasUteis(this.props.datas, this.props.selected) }
+          markedDates= { formatarDatas(this.props.datas, this.props.selected) }
         />
         <View style={styles.containerDados}>
           <View style={styles.containerData}>
