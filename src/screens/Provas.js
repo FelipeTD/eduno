@@ -10,8 +10,8 @@ import {
   FlatList
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars'
-import { localeDate } from '../Enums/dateUtil'
-import { formatarDatas } from '../functions/calendarFunctions'
+import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
+import { formatarDatas, filtrarProvas } from '../functions/calendarFunctions'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -22,8 +22,7 @@ class Provas extends Component {
     diaDaSemanaReduzido: '',
     diaDoMes: '',
     provas: [],
-    datas: [],
-    identificador: this.props.id
+    datas: []
   }
 
   constructor(props) {
@@ -31,17 +30,49 @@ class Provas extends Component {
     this.onDayPress = this.onDayPress.bind(this);
   }
 
-  componentDidMount = () => {
-    this.props.onFetchProvas(this.props.token.toString(), this.props.filhos, this.props.id)
-    this.diaPadrao(new Date())
+  carregarInformacoesDiaAtual(dataPadrao) {
+    this.state.provas = []
+    this.state.provas.push(filtrarProvas(this.props.provas, dataPadrao))
+    this.state.diaDaSemanaReduzido = localeDate.dayNamesShort[dataPadrao.getDay()].toString()
+    this.state.diaDoMes = dataPadrao.getDate().toString()
   }
 
-  componentDidUpdate = () => {
-    if (this.state.identificador != this.props.id) {
-      if (this.props.token != null) {
-        this.props.onFetchProvas(this.props.token.toString(), this.props.filhos, this.props.id)
-        this.diaPadrao(new Date())
-      }
+  onDayPress(day) {
+    this.state.provas = []
+    let data = new Date(day.dateString.toString())
+    this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[data.getDay()].toString()
+    data.setDate(data.getDate() + 1)
+    this.state.provas.push(filtrarProvas(this.props.provas, data))
+    this.state.diaDoMes = data.getDate().toString()
+    this.setState({
+      selected: day.dateString
+    });
+  }
+
+  carregaLista() {
+    if (this.state.provas[0] !== null) {
+      return (
+        <FlatList
+          data={this.state.provas}
+          keyExtractor={item => `${item.id}`}
+          renderItem={({ item }) => 
+            <View style={styles.lista}>
+              <Text style={styles.linha}>{item.atividade} - {item.disciplina}</Text>
+              <Text style={styles.linha}>
+                Valor: {item.valor} - 
+                Nota: {item.nota}
+              </Text>
+              <Text style={styles.detalhe}>{item.detalhe}</Text>
+            </View>
+          } 
+        />
+      )
+    } else {
+      return (
+        <View style={styles.lista}>
+          <Text style={styles.linha}>Não há provas</Text>
+        </View>
+      )
     }
   }
 
@@ -69,108 +100,9 @@ class Provas extends Component {
     return substractMonth
   }
 
-  diaPadrao(dataPadrao) {
-
-    this.state.provas = []
-
-    dataClicada = dataPadrao.getDate().toString() + 
-                  dataPadrao.getMonth().toString() + 
-                  dataPadrao.getFullYear().toString()
-
-    for (let x = 0; x < this.props.provas.length; x++) {
-      
-      let date = new Date(this.props.provas[x].data.toString())
-      date.setDate(date.getDate() + 1)
-
-      dataRetorno = date.getDate().toString() + 
-                  date.getMonth().toString() + 
-                  date.getFullYear().toString()
-
-      if (dataClicada === dataRetorno) {
-        this.state.provas.push({
-          disciplina: this.props.provas[x].disciplina,
-          atividade: this.props.provas[x].atividade,
-          valor: this.props.provas[x].valor,
-          nota: this.props.provas[x].nota,
-          detalhe: this.props.provas[x].detalhe
-        })
-      }
-    }
-
-    const semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-    const dataSemana = dataPadrao
-
-    this.state.diaDaSemanaReduzido = semana[dataSemana.getDay()].toString()
-    this.state.diaDoMes = dataPadrao.getDate().toString()
-
-  }
-
-  onDayPress(day) {
-    this.state.provas = []
-
-    let data = new Date(day.dateString.toString())
-    data.setDate(data.getDate() + 1)
-
-    dataClicada = data.getDate().toString() + 
-                  data.getMonth().toString() + 
-                  data.getFullYear().toString()
-
-    for (let x = 0; x < this.props.provas.length; x++) {
-      
-      let date = new Date(this.props.provas[x].data.toString())
-      date.setDate(date.getDate() + 1)
-
-      dataRetorno = date.getDate().toString() + 
-                  date.getMonth().toString() + 
-                  date.getFullYear().toString()
-
-      if (dataClicada === dataRetorno) {
-        this.state.provas.push({
-          disciplina: this.props.provas[x].disciplina,
-          atividade: this.props.provas[x].atividade,
-          valor: this.props.provas[x].valor,
-          nota: this.props.provas[x].nota,
-          detalhe: this.props.provas[x].detalhe
-        })
-      }
-    }
-
-    const semana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-    const dataSemana = new Date(day.dateString.toString())
-
-    this.state.diaDaSemanaReduzido = semana[dataSemana.getDay()].toString()
-    this.state.diaDoMes = data.getDate().toString()
-
-    this.setState({
-      selected: day.dateString
-    });
-  }
-
-  carregaLista() {
-    if (this.state.provas.length > 0) {
-      return (
-        <FlatList
-          data={this.state.provas}
-          keyExtractor={item => `${item.id}`}
-          renderItem={({ item }) => 
-            <View style={styles.lista}>
-              <Text style={styles.linha}>{item.atividade} - {item.disciplina}</Text>
-              <Text style={styles.linha}>
-                Valor: {item.valor} - 
-                Nota: {item.nota}
-              </Text>
-              <Text style={styles.detalhe}>{item.detalhe}</Text>
-            </View>
-          } 
-        />
-      )
-    } else {
-      return (
-        <View style={styles.lista}>
-          <Text style={styles.linha}>Não há provas</Text>
-        </View>
-      )
-    }
+  componentDidMount = () => {
+    this.props.onFetchProvas(this.props.token.toString(), this.props.filhos, this.props.id)
+    this.carregarInformacoesDiaAtual(new Date())
   }
 
   render() {
@@ -294,9 +226,8 @@ const mapStateToProps = ({ dadosProvas, userEduno }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      onFetchProvas: (token, filhos, id) => dispatch(fetchProvas(token, filhos, id)),
-      onRefreshProvas: (mes, ano, token, filhos, id) => 
-        dispatch(refreshProvas(mes, ano, token, filhos, id))
+    onFetchProvas: (token, filhos, id) => dispatch(fetchProvas(token, filhos, id)),
+    onRefreshProvas: (mes, ano, token, filhos, id) => dispatch(refreshProvas(mes, ano, token, filhos, id))
   }
 }
 

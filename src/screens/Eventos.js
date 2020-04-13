@@ -210,13 +210,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ dadosEventos, userEduno }) => {
   return {
-      mes: dadosEventos.mes,
-      ano: dadosEventos.ano,
-      eventos: dadosEventos.eventos,
-      datas: dadosEventos.datas,
-      filhos: userEduno.filhos,
-      token: userEduno.token,
-      id: userEduno.id
+    mes: dadosEventos.mes,
+    ano: dadosEventos.ano,
+    eventos: dadosEventos.eventos,
+    datas: dadosEventos.datas,
+    filhos: userEduno.filhos,
+    token: userEduno.token,
+    id: userEduno.id
   }
 }
 

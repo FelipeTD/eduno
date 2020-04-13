@@ -17,7 +17,7 @@ export const formatarDatas = (datas, selected) => {
     return retorno;
 }
 
-export const filtrarDatas = (eventos, data) => {
+export const filtrarEventos = (eventos, data) => {
     if (eventos.length > 0) {
         for (let x = 0; x < eventos.length; x++) {
             let dataFormatada = eventos[x].disciplina.toString().substring(0,10)
@@ -31,4 +31,20 @@ export const filtrarDatas = (eventos, data) => {
     } else {
         return null
     }
+}
+
+export const filtrarProvas = (provas, data) => {
+  if (provas.length > 0) {
+      for (let x = 0; x < provas.length; x++) {
+          let dataFormatada = provas[x].data.toString().substring(0,10)
+          let dataRetorno = new Date(dataFormatada)
+          dataRetorno.setDate(dataRetorno.getDate() + 1)
+          if (formateDate(data) === formateDate(dataRetorno)) {
+              return provas[x]
+          }
+      }
+      return null
+  } else {
+      return null
+  }
 }
