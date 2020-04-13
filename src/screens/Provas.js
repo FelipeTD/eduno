@@ -5,13 +5,13 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  Alert,
   Dimensions,
   View,
   FlatList
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { localeDate } from '../Enums/dateUtil'
+import { datasUteis } from '../functions/eventosFunctions'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -106,9 +106,6 @@ class Provas extends Component {
   }
 
   onDayPress(day) {
-
-    // this.datasMarcadas()
-
     this.state.provas = []
 
     let data = new Date(day.dateString.toString())
@@ -176,254 +173,6 @@ class Provas extends Component {
     }
   }
 
-  datasUteis() {
-
-    let retorno = {}
-    const constante = {selected: true, marked: true, selectedColor: 'blue'}
-    let tamanho = 0
-    if (this.props.datas != null) {
-      tamanho = this.props.datas.length
-    }
-
-    if (tamanho == 0) {
-      retorno = {[this.props.selected]: {selected: true, marked: true, selectedColor: 'blue'}}
-    } else if (tamanho == 1) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,}
-    } else if (tamanho == 2) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,}
-    } else if (tamanho == 3) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,}
-    } else if (tamanho == 4) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,}
-    } else if (tamanho == 5) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,}
-    } else if (tamanho == 6) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,}
-    } else if (tamanho == 7) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,}
-    } else if (tamanho == 8) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,}
-    } else if (tamanho == 9) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,}
-    } else if (tamanho == 10) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,}
-    } else if (tamanho == 11) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,}
-    } else if (tamanho == 12) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,}
-    } else if (tamanho == 13) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,}
-    } else if (tamanho == 14) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,}
-    } else if (tamanho == 15) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,}
-    } else if (tamanho == 16) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,
-        [this.props.datas[15].data.toString()]: constante,}
-    } else if (tamanho == 17) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,
-        [this.props.datas[15].data.toString()]: constante,
-        [this.props.datas[16].data.toString()]: constante,}
-    } else if (tamanho == 18) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,
-        [this.props.datas[15].data.toString()]: constante,
-        [this.props.datas[16].data.toString()]: constante,
-        [this.props.datas[17].data.toString()]: constante,}
-    } else if (tamanho == 19) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,
-        [this.props.datas[15].data.toString()]: constante,
-        [this.props.datas[16].data.toString()]: constante,
-        [this.props.datas[17].data.toString()]: constante,
-        [this.props.datas[18].data.toString()]: constante,}
-    } else if (tamanho == 20) {
-      retorno = {[this.props.datas[0].data.toString()]: constante,
-        [this.props.datas[1].data.toString()]: constante,
-        [this.props.datas[2].data.toString()]: constante,
-        [this.props.datas[3].data.toString()]: constante,
-        [this.props.datas[4].data.toString()]: constante,
-        [this.props.datas[5].data.toString()]: constante,
-        [this.props.datas[6].data.toString()]: constante,
-        [this.props.datas[7].data.toString()]: constante,
-        [this.props.datas[8].data.toString()]: constante,
-        [this.props.datas[9].data.toString()]: constante,
-        [this.props.datas[10].data.toString()]: constante,
-        [this.props.datas[11].data.toString()]: constante,
-        [this.props.datas[12].data.toString()]: constante,
-        [this.props.datas[13].data.toString()]: constante,
-        [this.props.datas[14].data.toString()]: constante,
-        [this.props.datas[15].data.toString()]: constante,
-        [this.props.datas[16].data.toString()]: constante,
-        [this.props.datas[17].data.toString()]: constante,
-        [this.props.datas[18].data.toString()]: constante,
-        [this.props.datas[19].data.toString()]: constante,}
-    } else {
-      retorno = {[this.props.selected]: {selected: true, marked: true, selectedColor: 'blue'}}
-    }
-
-    return retorno;
-  }
-
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -434,7 +183,7 @@ class Provas extends Component {
           onPressArrowRight={addMonth => this.setaDireita(addMonth, this.props.mes, this.props.ano)}
           style={styles.calendar}
           hideExtraDays
-          markedDates= { this.datasUteis() }
+          markedDates= { datasUteis(this.props.datas, this.props.selected) }
         />
         <View style={styles.containerDados}>
           <View style={styles.containerData}>
