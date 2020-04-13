@@ -5,7 +5,6 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  Alert,
   Dimensions,
   View,
   FlatList
@@ -13,7 +12,7 @@ import {
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
 import { formataData } from '../functions/formatador'
-import { filtrarEventos } from '../functions/eventosFunction/filtrarEventos'
+import { filtrarEventos, datasUteis } from '../functions/eventosFunctions'
 
 LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
@@ -74,23 +73,6 @@ class Eventos extends Component {
     }
   }
 
-  datasUteis() {
-    let retorno = {}
-    const constante = {selected: true, marked: true, selectedColor: 'blue'}
-    let tamanho = 0
-    if (this.props.datas != null) {
-      tamanho = this.props.datas.length
-    }
-    for (let x = 0; x < tamanho; x++) {
-      const retornoAux = {[this.props.datas[x].data.toString()]: constante}
-      retorno = Object.assign(retorno, retornoAux)
-    }
-    if (tamanho == 0) {
-      retorno = {[this.props.selected]: constante}
-    }
-    return retorno;
-  }
-
   setaDireita(addMonth, mes, ano) {
     addMonth = addMonth()
     if (mes == 12) {
@@ -130,7 +112,7 @@ class Eventos extends Component {
           onPressArrowRight={addMonth => this.setaDireita(addMonth, this.props.mes, this.props.ano)}
           style={styles.calendar}
           hideExtraDays
-          markedDates= { this.datasUteis() }
+          markedDates= { datasUteis(this.props.datas, this.props.selected) }
         />
         <View style={styles.containerDados}>
           <View style={styles.containerData}>
