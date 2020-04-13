@@ -55,13 +55,14 @@ export const fetchEventos = (token, filhos, id) => {
                 }
             })
             .then(res => {
-                res.data.notas.push({
-                        "disciplina": "2020-04-11T03:00:00.000Z",
-                        "tipo": "Recesso",
-                        "titulo": "RECESSO DE CARNAVAL",
-                        "publico": "Escola",
-                        "detalhe": null
-                    })
+                // Adicionar dados mockados
+                // res.data.notas.push({
+                //         "disciplina": "2020-04-11T03:00:00.000Z",
+                //         "tipo": "Recesso",
+                //         "titulo": "RECESSO DE CARNAVAL",
+                //         "publico": "Escola",
+                //         "detalhe": null
+                //     })
                 const rawEventos = res.data.notas
                 const eventos = []
                 for (let key in rawEventos) {
@@ -83,15 +84,6 @@ export const fetchEventos = (token, filhos, id) => {
                         eventosMensais.push(eventos[x])
                     }
                 }
-
-                // eventosMensains.push({
-                //     id: 10,
-                //     disciplina: "2020-04-11T03:00:00.000Z",
-                //     tipo: "Feriado",
-                //     titulo: "Feriado do filipe",
-                //     publico: "Trabalho",
-                //     detalhe: "Minha descrição"
-                // })
 
                 const datas = []
                 if (eventosMensais.length > 0) {
