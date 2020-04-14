@@ -4,27 +4,20 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
     Dimensions,
-    Alert,
-    ScrollView
+    ScrollView 
 } from 'react-native'
 import { fetchNoticiaDetalhada } from '../store/actions/noticiaDetalhada'
 import { connect } from 'react-redux'
-import { formataData } from '../functions/formatador'
+import { formataData, formataImagem } from '../functions/formatador'
 
 class NoticiaDetalhada extends Component {
-
-    formataImagem() {
-        const base64 = 'data:image/png;base64,' + this.props.image
-        return base64
-    }
 
     render() {
         return (
             <View style={styles.container}>
                <View style={styles.rowContainer}>
-                   <Image source={{uri: this.formataImagem()}}  style={styles.image} />
+                   <Image source={{uri: formataImagem(this.props.image)}}  style={styles.image} />
                </View>
                <View style={styles.rowContainer}>
                     <Text style={styles.title}>

@@ -26,3 +26,7 @@ export const formateDate = data => {
         data.getMonth().toString() + 
         data.getFullYear().toString() : data
 }
+
+export const formataImagem = image => {
+    return 'data:image/png;base64,' + image
+}
