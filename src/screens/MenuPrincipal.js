@@ -7,114 +7,43 @@ import {
     Text,
     Dimensions,
     TouchableOpacity,
-    Alert
+    Alert,
 } from 'react-native'
 import Icon2 from 'react-native-vector-icons/FontAwesome'
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import fontelloConfig from '../config.json'
+import { telas } from '../Enums/menu'
+
 const Icon = createIconSetFromFontello(fontelloConfig)
 
 class MenuPrincipal extends Component {
 
-    boletim = () => {
-        this.props.navigation.navigate('Boletim')
-    }
-
-    provas = () => {
-        this.props.navigation.navigate('Provas')
-    }
-
-    noticias = () => {
-        this.props.navigation.navigate('Noticias')
-    }
-
-    horarios = () => {
-        this.props.navigation.navigate('Horarios')
-    }
-
-    tarefas = () => {
-        this.props.navigation.navigate('Tarefas')
-    }
-
-    eventos = () => {
-        this.props.navigation.navigate('Eventos')
-    }
-
-    financeiro = () => {
-        Alert.alert('Alerta', 'Em desenvolvimento')
-    }
-
-    perfil = () => {
-        this.props.navigation.navigate('ProfileEduno')
+    navegar = tela => {
+        if (tela == 'Financeiro') {
+            Alert.alert('Alerta', 'Em desenvolvimento')
+        } else {
+            this.props.navigation.navigate(tela)
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.boletim}>
-                        <Icon name='boletim' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.boletim}>
-                        <Text style={styles.description}>boletim</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.provas}>
-                        <Icon name='provas' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.provas}>
-                        <Text style={styles.description}>provas</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.noticias}>
-                        <Icon name='news' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.noticias}>
-                        <Text style={styles.description}>notícias</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.horarios}>
-                        <Icon name='calendário' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.horarios}>
-                        <Text style={styles.description}>horários</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.tarefas}>
-                        <Icon name='tarefas' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.tarefas}>
-                        <Text style={styles.description}>tarefas</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.eventos}>
-                        <Icon name='eventos' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.eventos}>
-                        <Text style={styles.description}>eventos</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.financeiro}>
-                        <Icon2 name='dollar' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.financeiro}>
-                        <Text style={styles.description}>financeiro</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.rowContainer}>
-                    <TouchableOpacity onPress={this.perfil}>
-                        <Icon2 name='user' style={styles.icon} size={45} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.perfil}>
-                        <Text style={styles.description}>perfil</Text>
-                    </TouchableOpacity>
-                </View>
+                <FlatList
+                    data={telas}
+                    keyExtractor={item => `${item.id}`}
+                    renderItem={({ item }) => 
+                    <View style={styles.rowContainer}>
+                        <TouchableOpacity onPress={() => this.navegar(item.name)}>
+                            {item.name === 'Financeiro' || item.name === 'ProfileEduno' ?
+                                <Icon2 name={item.icon} style={styles.icon} size={30} /> :
+                                <Icon name={item.icon} style={styles.icon} size={30} /> 
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.navegar(item.name)}>
+                            <Text style={styles.description}>{item.nomeExibicao}</Text>
+                        </TouchableOpacity>
+                    </View>} />
             </View>
         )
     }
@@ -128,7 +57,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#495057',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        paddingTop: 10
     },
     rowContainer: {
         flexDirection: 'row',
