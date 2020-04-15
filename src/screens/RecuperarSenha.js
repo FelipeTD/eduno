@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { recuperaSenha } from '../store/actions/userEduno'
 
 class RecuperarSenha extends Component {
+
     state = {
         nome: null,
         email: null,
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        // justifyContent: 'center',
         backgroundColor: '#2C2D3F'
     },
     buttom: {

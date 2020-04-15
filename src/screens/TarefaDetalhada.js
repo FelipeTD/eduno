@@ -10,11 +10,11 @@ import {
 
 class TarefaDetalhada extends Component {
 
-    renderUnique = () => {
+    render = () => {
         return (
             <View style={styles.container}>
                <View style={styles.rowContainer}>
-                    <Text style={styles.titlePrincipal}>{this.props.disciplina}</Text>
+                    <Text style={styles.disciplina}>{this.props.disciplina}</Text>
                </View>
                <View style={styles.rowContainer}>
                     <Text style={styles.paragrafo}>{this.props.titulo}</Text> 
@@ -29,24 +29,19 @@ class TarefaDetalhada extends Component {
         )
     }
 
-    render() {
-        return this.renderUnique()
-    }
-
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        //backgroundColor: '#2C2D3F'
         backgroundColor: '#495057'
     },
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    titlePrincipal: {
+    disciplina: {
         paddingTop: 20,
         color: '#F5FCFF',
         height: 60,
