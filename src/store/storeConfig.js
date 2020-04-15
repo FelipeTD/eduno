@@ -14,7 +14,6 @@ import provasReducer from './reducers/provas'
 import eventosReducer from './reducers/eventos'
 import messageReducer from './reducers/message'
 import inicioReducer from './reducers/inicio'
-import tarefaDetalhadaReducer from './reducers/tarefaDetalhada'
 import noticiaDetalhadaReducer from './reducers/noticiaDetalhada'
 
 const reducers = combineReducers({
@@ -26,7 +25,6 @@ const reducers = combineReducers({
     etapa: etapaReducer,
     dadosEventos: eventosReducer,
     dadosTarefas: tarefaReducer,
-    dadosTarefaDetalhada: tarefaDetalhadaReducer,
     quadro: horariosReducer,
     dadosProvas: provasReducer
 })

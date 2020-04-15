@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { refreshTarefas, fetchTarefas } from '../store/actions/tarefa'
-import { fetchTarefaDetalhada } from '../store/actions/tarefaDetalhada'
 import {
     StyleSheet,
     FlatList,
@@ -62,19 +61,6 @@ class Tarefas extends Component {
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    carregaTarefaDetalhada(disciplina, titulo, data_entrega, detalhe) {
-        const tarefa = {
-            disciplina: disciplina,
-            titulo: titulo,
-            data_entrega: data_entrega,
-            detalhe: detalhe
-        }
-
-        this.props.onFetchTarefaDetalhada(tarefa)
-        this.props.navigation.navigate('TarefaDetalhada')
-
-    }
-
     componentDidMount = () => {
         this.props.onFetchTarefas(this.props.token.toString(), this.props.filhos, this.props.id)
         this.state.identificador = -1
@@ -115,13 +101,13 @@ class Tarefas extends Component {
                                         {item.disciplina}
                                     </Text>
                                     <TouchableOpacity 
-                                        onPress={() => 
-                                        {this.carregaTarefaDetalhada(
-                                            item.disciplina,
-                                            item.titulo,
-                                            formataData(item.data_entrega),
-                                            item.detalhe
-                                        )}}>
+                                        onPress={() => {
+                                            this.props.navigation.navigate('TarefaDetalhada', {
+                                                disciplina: item.disciplina,
+                                                titulo: item.titulo,
+                                                data_entrega: formataData(item.data_entrega),
+                                                detalhe: item.detalhe
+                                            })}}>
                                         <Text style={styles.link}>Ver</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -223,12 +209,11 @@ const styles = StyleSheet.create({
     
 })
 
-const mapStateToProps = ({ dadosTarefas, dadosTarefaDetalhada, userEduno }) => {
+const mapStateToProps = ({ dadosTarefas, userEduno }) => {
     return {
         numeroEtapaTarefa: dadosTarefas.numeroEtapaTarefa,
         data: dadosTarefas.data,
         tarefas: dadosTarefas.tarefas,
-        requestTarefa: dadosTarefaDetalhada.requestTarefa,
         filhos: userEduno.filhos,
         token: userEduno.token,
         id: userEduno.id
@@ -238,7 +223,6 @@ const mapStateToProps = ({ dadosTarefas, dadosTarefaDetalhada, userEduno }) => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchTarefas: (token, filhos, id) => dispatch(fetchTarefas(token, filhos, id)),
-        onFetchTarefaDetalhada: requestTarefa => dispatch(fetchTarefaDetalhada(requestTarefa)),
         onAtualizaEtapaTarefa: (tarefa, filhos, token, id) => 
             dispatch(refreshTarefas(tarefa, filhos, token, id))
     }

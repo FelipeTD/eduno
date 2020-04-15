@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { fetchTarefaDetalhada } from '../store/actions/tarefaDetalhada'
 import { 
     View, 
     Text, 
@@ -14,16 +12,24 @@ class TarefaDetalhada extends Component {
         return (
             <View style={styles.container}>
                <View style={styles.rowContainer}>
-                    <Text style={styles.disciplina}>{this.props.disciplina}</Text>
+                    <Text style={styles.disciplina}>
+                        {this.props.navigation.state.params.disciplina}
+                    </Text>
                </View>
                <View style={styles.rowContainer}>
-                    <Text style={styles.paragrafo}>{this.props.titulo}</Text> 
+                    <Text style={styles.paragrafo}>
+                        {this.props.navigation.state.params.titulo}
+                    </Text> 
                </View>
                <View style={styles.rowContainer}>
-                    <Text style={styles.paragrafo}>Data de entrega: {this.props.data_entrega}</Text> 
+                    <Text style={styles.paragrafo}>
+                        Data de entrega: {this.props.navigation.state.params.data_entrega}
+                    </Text> 
                </View>
                <View style={styles.rowContainer}>
-                    <Text style={styles.paragrafo}>{this.props.detalhe}</Text> 
+                    <Text style={styles.paragrafo}>
+                        {this.props.navigation.state.params.detalhe}
+                    </Text> 
                </View>
             </View>
         )
@@ -61,19 +67,4 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = ({ dadosTarefaDetalhada }) => {
-    return {
-        disciplina: dadosTarefaDetalhada.disciplina,
-        titulo: dadosTarefaDetalhada.titulo,
-        data_entrega: dadosTarefaDetalhada.data_entrega,
-        detalhe: dadosTarefaDetalhada.detalhe
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchTarefaDetalhada: requestTarefa => dispatch(fetchTarefaDetalhada(requestTarefa)),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TarefaDetalhada)
+export default TarefaDetalhada
