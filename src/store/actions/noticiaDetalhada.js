@@ -30,7 +30,6 @@ export const fetchNoticiaDetalhada = (requestNoticia, token) => {
                 }))
             })
             .then(res => {
-                
                 const noticia = {
                     ident: requestNoticia.ident,
                     titul: res.data.titul,
@@ -39,12 +38,6 @@ export const fetchNoticiaDetalhada = (requestNoticia, token) => {
                     atual: res.data.atual,
                     image: res.data.foto
                 }
-
-                // dispatch(setMessage({
-                //     title: 'Sucess',
-                //     text: res.data.foto.toString()
-                // }))
-
                 dispatch(setNoticiaDetalhada(noticia))
             })
     }

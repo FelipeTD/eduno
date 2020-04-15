@@ -18,6 +18,7 @@ LocaleConfig.locales['pt-br'] = localeDate
 LocaleConfig.defaultLocale = 'pt-br'
 
 class Eventos extends Component {
+  
   state = {
     diaDaSemanaReduzido: '',
     diaDoMes: '',

@@ -13,43 +13,19 @@ import {
     Alert
 } from 'react-native'
 import { formataData } from '../functions/formatador'
+const image = require('../../assets/imgs/fence.jpg')
 
 class Noticias extends Component {
 
-    state = {
-        noticias: [{
-            id: this.props.noticias[0].ident,
-            image: require('../../assets/imgs/fence.jpg'),
-            description: this.props.noticias[0].sinop,
-            titulo: this.props.noticias[0].titul,
-            data: this.props.noticias[0].atual
-        }, {
-            id: this.props.noticias[1].ident,
-            image: require('../../assets/imgs/bw.jpg'),
-            description: this.props.noticias[1].sinop,
-            titulo: this.props.noticias[1].titul,
-            data: this.props.noticias[1].atual
-        }, {
-            id: this.props.noticias[2].ident,
-            image: require('../../assets/imgs/fence.jpg'),
-            description: this.props.noticias[2].sinop,
-            titulo: this.props.noticias[2].titul,
-            data: this.props.noticias[2].atual
-        }]
-    }
-
-    carregaNoticiaDetalhada(ident, titul, sinop, atual, image) {
-        const noticia = {
-            ident: ident,
-            titul: titul,
-            sinop: sinop,
-            atual: atual,
+    carregarNoticiaDetalhada(noticia, image) {
+        this.props.onFecthNoticiaDetalhada({
+            ident: noticia.ident,
+            titul: noticia.titul,
+            sinop: noticia.sinop,
+            atual: formataData(noticia.atual),
             image: image
-        }
-
-        this.props.onFecthNoticiaDetalhada(noticia, this.props.token)
+        }, this.props.token)
         this.props.navigation.navigate('NoticiaDetalhada')
-
     }
 
     componentDidMount() {
@@ -60,7 +36,7 @@ class Noticias extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.rowContainer}>
-                   <Image source={this.state.noticias[0].image} style={styles.image} />
+                   <Image source={image} style={styles.image} />
                 </View>
                 <View style={styles.rowContainer}>
                     <Text style={styles.title}>{this.props.noticias[0].titul}</Text>
@@ -68,38 +44,24 @@ class Noticias extends Component {
                 <View style={styles.rowContainerLast}>
                     <Text style={styles.data}>{formataData(this.props.noticias[0].atual)}</Text>
                     <TouchableOpacity 
-                        onPress={() => 
-                        {this.carregaNoticiaDetalhada(
-                            this.state.noticias[0].id,
-                            this.props.noticias[0].titul,
-                            this.props.noticias[0].sinop,
-                            formataData(this.props.noticias[0].atual),
-                            this.state.noticias[0].image
-                        )}}>
+                        onPress={() => {this.carregarNoticiaDetalhada(this.props.noticias[0], image)}}>
                         <Text style={styles.link}>Leia mais</Text>
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={this.state.noticias}
-                    keyExtractor={item => `${item.id}`}
+                    data={this.props.noticias}
+                    keyExtractor={item => `${item.ident}`}
                     renderItem={({ item }) => 
-                    item.id !== 1 ?
+                    item.ident !== 1 ?
                     <View style={styles.container}>
                         <View style={styles.rowContainer2}>
-                            <Image style={styles.imageSecundario} source={item.image} />
-                            <Text style={styles.titleSecundario}>{item.titulo}</Text>
+                            <Image style={styles.imageSecundario} source={image} />
+                            <Text style={styles.titleSecundario}>{item.titul}</Text>
                         </View>
                         <View style={styles.rowContainerSecundario}>
-                            <Text style={styles.dataSecundario}>{formataData(item.data)}</Text>
+                            <Text style={styles.dataSecundario}>{formataData(item.atual)}</Text>
                             <TouchableOpacity 
-                                onPress={() => 
-                                {this.carregaNoticiaDetalhada(
-                                    item.id,
-                                    item.titulo,
-                                    item.description,
-                                    formataData(item.data),
-                                    item.image
-                                )}}>
+                                onPress={() => {this.carregarNoticiaDetalhada(item, image)}}>
                                 <Text style={styles.linkSecundario}>Leia mais</Text>
                             </TouchableOpacity>
                         </View>

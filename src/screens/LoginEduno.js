@@ -15,6 +15,7 @@ import CryptoJS from 'react-native-crypto-js/CryptoJS'
 import { mockLogin } from '../Enums/login'
 
 class LoginEduno extends Component {
+  
   state = mockLogin[0]
 
   login = () => {
