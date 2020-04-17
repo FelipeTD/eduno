@@ -9,8 +9,7 @@ import {
     TouchableOpacity,
     Dimensions,
     Text,
-    Image,
-    Alert
+    Image
 } from 'react-native'
 import { formataData } from '../functions/formatador'
 const image = require('../../assets/imgs/fence.jpg')
@@ -52,20 +51,20 @@ class Noticias extends Component {
                     data={this.props.noticias}
                     keyExtractor={item => `${item.ident}`}
                     renderItem={({ item }) => 
-                    item.ident !== 1 ?
-                    <View style={styles.container}>
-                        <View style={styles.rowContainer2}>
-                            <Image style={styles.imageSecundario} source={image} />
-                            <Text style={styles.titleSecundario}>{item.titul}</Text>
-                        </View>
-                        <View style={styles.rowContainerSecundario}>
-                            <Text style={styles.dataSecundario}>{formataData(item.atual)}</Text>
-                            <TouchableOpacity 
-                                onPress={() => {this.carregarNoticiaDetalhada(item, image)}}>
-                                <Text style={styles.linkSecundario}>Leia mais</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View> : null }
+                        item.ident !== 1 ?
+                        <View style={styles.container}>
+                            <View style={styles.rowContainer2}>
+                                <Image style={styles.imageSecundario} source={image} />
+                                <Text style={styles.titleSecundario}>{item.titul}</Text>
+                            </View>
+                            <View style={styles.rowContainerSecundario}>
+                                <Text style={styles.dataSecundario}>{formataData(item.atual)}</Text>
+                                <TouchableOpacity 
+                                    onPress={() => {this.carregarNoticiaDetalhada(item, image)}}>
+                                    <Text style={styles.linkSecundario}>Leia mais</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View> : null }
                 />
             </View>
         )

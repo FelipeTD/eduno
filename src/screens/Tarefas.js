@@ -7,8 +7,7 @@ import {
     View,
     Text,
     Dimensions,
-    TouchableOpacity,
-    Alert
+    TouchableOpacity
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { formataData } from '../functions/formatador'
@@ -19,7 +18,7 @@ class Tarefas extends Component {
         identificador: this.props.id
     }
 
-    atualizaSetaDireita = async () => {
+    atualizaSetaDireita = () => {
         if (this.props.numeroEtapaTarefa == 4) {
             this.props.numeroEtapaTarefa = 0
         }
@@ -40,7 +39,7 @@ class Tarefas extends Component {
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    atualizaSetaEsquerda = async () => {
+    atualizaSetaEsquerda = () => {
         if (this.props.numeroEtapaTarefa == 1) {
             this.props.numeroEtapaTarefa = 5
         }

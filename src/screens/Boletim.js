@@ -75,7 +75,9 @@ class Boletim extends Component {
                 </View>
                 <View style={styles.containerTitle}>
                     <View style={styles.rowContainer}>
-                        <Text style={styles.valorEtapa}>Valor da etapa: {this.props.valor}</Text>
+                        <Text style={styles.valorEtapa}>
+                            Valor da etapa: {this.props.valor} Pontos
+                        </Text>
                     </View>
                     <View style={styles.rowContainer}>
                         <Text style={styles.disciplina}>Disciplina</Text>

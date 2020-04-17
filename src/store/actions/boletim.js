@@ -1,7 +1,6 @@
 import { ATUALIZA_ETAPA, SET_ETAPA } from './actionTypes'
 import { setMessage } from './message'
 import axios from 'axios'
-import { Alert } from 'react-native'
 
 export const atualizaEtapa = etapa => {
     return {
@@ -105,7 +104,7 @@ export const fetchNotas = (token, filhos, id) => {
                 }
                 const etapa = {
                     numeroEtapa: etapa_atual,
-                    descricao: `${etapa_atual} etapa`,
+                    descricao: `${etapa_atual}º etapa`,
                     valor: valor,
                     notas: notas
                 }
