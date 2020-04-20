@@ -14,10 +14,9 @@ export const formataHora = hora => {
 }
 
 export const formataData = data => {
-    return data !== null ? 
-        data.toString().substring(8, 10) + '/' +
-        data.toString().substring(5, 7) + '/' + 
-        data.toString().substring(0, 4) : data
+    return data ? data.toString().substring(8, 10) + '/' +
+    data.toString().substring(5, 7) + '/' + 
+    data.toString().substring(0, 4) : data
 }
 
 export const formateDate = data => {
@@ -25,6 +24,19 @@ export const formateDate = data => {
         data.getDate().toString() + 
         data.getMonth().toString() + 
         data.getFullYear().toString() : data
+}
+
+export const formataDataParaExibicao = data => {
+    if (data !== null) {
+        const dia = data.getDate().toString() >= 10 ? 
+            data.getDate().toString() : 
+            '0' + data.getDate().toString()
+        const mes = data.getMonth().toString() >= 10 ?
+            data.getMonth().toString() :
+            '0' + data.getMonth().toString()
+        return dia + '/' + mes + '/' + data.getFullYear().toString()
+    }
+    return data
 }
 
 export const formataImagem = image => {

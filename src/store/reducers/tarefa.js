@@ -1,9 +1,10 @@
 import { ATUALIZA_TAREFA, SET_TAREFAS } from '../actions/actionTypes'
 
 const initialState = {
-    numeroEtapaTarefa: 1,
+    numeroEtapaTarefa: 0,
     data: '1º etapa',
-    tarefas: []
+    tarefas: [],
+    tarefaAtual: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,14 +14,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 numeroEtapaTarefa: action.payload.numeroEtapaTarefa,
                 data: action.payload.data,
-                tarefas: action.payload.tarefas
+                tarefas: action.payload.tarefas,
+                tarefaAtual: action.payload.tarefaAtual
             }
         case SET_TAREFAS:
             return {
                 ...state,
                 numeroEtapaTarefa: action.payload.numeroEtapaTarefa,
                 data: action.payload.data,
-                tarefas: action.payload.tarefas
+                tarefas: action.payload.tarefas,
+                tarefaAtual: action.payload.tarefaAtual
             }
         default:
             return state

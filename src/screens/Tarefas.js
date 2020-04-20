@@ -7,10 +7,11 @@ import {
     View,
     Text,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { formataData } from '../functions/formatador'
+import { formataData, formataDataParaExibicao } from '../functions/formatador'
 
 class Tarefas extends Component {
 
@@ -19,44 +20,31 @@ class Tarefas extends Component {
     }
 
     atualizaSetaDireita = () => {
-        if (this.props.numeroEtapaTarefa == 4) {
+        const limite = this.props.tarefas.length - 1
+        if (this.props.numeroEtapaTarefa == limite) {
             this.props.numeroEtapaTarefa = 0
+        } else {
+            this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa + 1
         }
-        this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa + 1
-        if (this.props.numeroEtapaTarefa == 1) {
-            this.props.data = '1º etapa'
-        } else if (this.props.numeroEtapaTarefa == 2) {
-            this.props.data = '2º etapa'
-        } else if (this.props.numeroEtapaTarefa == 3) {
-            this.props.data = '3º etapa'
-        } else if (this.props.numeroEtapaTarefa == 4) {
-            this.props.data = '4º etapa'
-        }
-        this.props.onAtualizaEtapaTarefa({
+        this.props.onAtualizaDataTarefa({
             numeroEtapaTarefa: this.props.numeroEtapaTarefa,
             data: this.props.data,
-            tarefas: []
+            tarefas: [],
+            tarefaAtual: []
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
     atualizaSetaEsquerda = () => {
-        if (this.props.numeroEtapaTarefa == 1) {
-            this.props.numeroEtapaTarefa = 5
+        if (this.props.numeroEtapaTarefa == 0) {
+            this.props.numeroEtapaTarefa = this.props.tarefas.length - 1
+        } else {
+            this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa - 1
         }
-        this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa - 1
-        if (this.props.numeroEtapaTarefa == 1) {
-            this.props.data = '1º etapa'
-        } else if (this.props.numeroEtapaTarefa == 2) {
-            this.props.data = '2º etapa'
-        } else if (this.props.numeroEtapaTarefa == 3) {
-            this.props.data = '3º etapa'
-        } else if (this.props.numeroEtapaTarefa == 4) {
-            this.props.data = '4º etapa'
-        }
-        this.props.onAtualizaEtapaTarefa({
+        this.props.onAtualizaDataTarefa({
             numeroEtapaTarefa: this.props.numeroEtapaTarefa,
             data: this.props.data,
-            tarefas: []
+            tarefas: [],
+            tarefaAtual: []
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
@@ -82,7 +70,9 @@ class Tarefas extends Component {
                         <TouchableOpacity onPress={this.atualizaSetaEsquerda}>
                             <Icon name='angle-left' size={45} color="#F5FCFF" />
                         </TouchableOpacity>
-                        <Text style={styles.dataTarefa}>{this.props.data}</Text>
+                        <Text style={styles.dataTarefa}>
+                            {formataData(this.props.tarefaAtual[0].data_entrega)}
+                        </Text>
                         <TouchableOpacity onPress={this.atualizaSetaDireita}>
                             <Icon name='angle-right' size={45} color="#F5FCFF" />
                         </TouchableOpacity>
@@ -91,7 +81,7 @@ class Tarefas extends Component {
                         <Text style={styles.subtitulo}>Disciplina</Text>
                     </View>
                     <FlatList
-                        data={this.props.tarefas}
+                        data={this.props.tarefaAtual}
                         keyExtractor={item => `${item.id}`}
                         renderItem={({ item }) => 
                             <View style={styles.containerTarefa}>
@@ -122,7 +112,7 @@ class Tarefas extends Component {
                         <TouchableOpacity onPress={this.atualizaSetaEsquerda}>
                             <Icon name='angle-left' size={45} color="#F5FCFF" />
                         </TouchableOpacity>
-                        <Text style={styles.dataTarefa}>{this.props.data}</Text>
+                        <Text style={styles.dataTarefa}>{formataDataParaExibicao(new Date())}</Text>
                         <TouchableOpacity onPress={this.atualizaSetaDireita}>
                             <Icon name='angle-right' size={45} color="#F5FCFF" />
                         </TouchableOpacity>
@@ -213,6 +203,7 @@ const mapStateToProps = ({ dadosTarefas, userEduno }) => {
         numeroEtapaTarefa: dadosTarefas.numeroEtapaTarefa,
         data: dadosTarefas.data,
         tarefas: dadosTarefas.tarefas,
+        tarefaAtual: dadosTarefas.tarefaAtual,
         filhos: userEduno.filhos,
         token: userEduno.token,
         id: userEduno.id
@@ -222,7 +213,7 @@ const mapStateToProps = ({ dadosTarefas, userEduno }) => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchTarefas: (token, filhos, id) => dispatch(fetchTarefas(token, filhos, id)),
-        onAtualizaEtapaTarefa: (tarefa, filhos, token, id) => 
+        onAtualizaDataTarefa: (tarefa, filhos, token, id) => 
             dispatch(refreshTarefas(tarefa, filhos, token, id))
     }
 }

@@ -32,13 +32,14 @@ export const refreshTarefas = (requestTarefas, filhos, token, id) => {
     return dispatch => {
 
         axios.get(`http://eduno.com.br:4827/tarefa/${data}/${codcurso}/${codserie}/${codturma}
-                    /${numeroEtapaTarefa}`, config)
+                    /1`, config)
             .catch(err => {
                 if (err.response.status === 400) {
                     const tarefaObjeto = {
-                        numeroEtapaTarefa: requestTarefas.numeroEtapaTarefa,
+                        numeroEtapaTarefa: numeroEtapaTarefa,
                         data: requestTarefas.data,
-                        tarefas: []
+                        tarefas: [],
+                        tarefaAtual: []
                     }
 
                     dispatch(setTarefas(tarefaObjeto))
@@ -60,10 +61,17 @@ export const refreshTarefas = (requestTarefas, filhos, token, id) => {
                         })
                     }
 
+                    let tarefasRetorno = []
+                    tarefasRetorno.push({
+                        ...rawTarefas[numeroEtapaTarefa],
+                        id: 0
+                    })               
+
                     const tarefaObjeto = {
-                        numeroEtapaTarefa: requestTarefas.numeroEtapaTarefa,
-                        data: requestTarefas.data,
-                        tarefas: tarefas
+                        numeroEtapaTarefa: numeroEtapaTarefa,
+                        data: '1º etapa',
+                        tarefas: tarefas,
+                        tarefaAtual: tarefasRetorno
                     }
 
                     dispatch(setTarefas(tarefaObjeto))
@@ -83,7 +91,6 @@ export const fetchTarefas = (token, filhos, id) => {
     const codcurso = filhos[id].codcurso.toString()
     const codserie = filhos[id].codserie.toString()
     const codturma = filhos[id].codturma.toString()
-    const ra = filhos[id].ra.toString()
 
     return dispatch => {
         axios.get(`http://eduno.com.br:4827/tarefa/${data}/${codcurso}/${codserie}/${codturma}/1`,
@@ -104,10 +111,17 @@ export const fetchTarefas = (token, filhos, id) => {
                     })
                 }
 
+                const tarefasRetorno = []
+                tarefasRetorno.push({
+                    ...rawTarefas[0],
+                    id: 0
+                }) 
+
                 const tarefaObjeto = {
-                    numeroEtapaTarefa: 1,
+                    numeroEtapaTarefa: 0,
                     data: '1º etapa',
-                    tarefas: tarefas
+                    tarefas: tarefas,
+                    tarefaAtual: tarefasRetorno
                 }
 
                 dispatch(setTarefas(tarefaObjeto))
