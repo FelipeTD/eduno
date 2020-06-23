@@ -1,0 +1,1 @@
+export const baseUrl = 'https://api2.eduno.com.br'
