@@ -1,5 +1,6 @@
 import { SET_INICIO } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const setInicio = inicioObjeto => {
@@ -16,7 +17,7 @@ export const fetchInicio = token => {
             headers: {'x-access-token': token,
                       'x-device-id': '12931293128'}
         };
-        axios.get('http://eduno.com.br:4827/inicio', config)
+        axios.get(`${baseUrl}/inicio`, config)
             .catch(err => {
                 dispatch(setMessage({
                     title: 'Erro',

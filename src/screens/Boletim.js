@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
+    Platform,
     StyleSheet,
     FlatList,
     View,

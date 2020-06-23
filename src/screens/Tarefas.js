@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { refreshTarefas, fetchTarefas } from '../store/actions/tarefa'
 import {
+    Platform,
     StyleSheet,
     FlatList,
     View,

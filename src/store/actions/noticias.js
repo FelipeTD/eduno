@@ -1,5 +1,6 @@
 import { SET_NOTICIAS } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const setNoticias = dadosNoticias => {
@@ -17,7 +18,7 @@ export const fetchNoticias = (token) => {
     };
 
     return dispatch => {
-        axios.get('http://eduno.com.br:4827/noticias', config)
+        axios.get(`${baseUrl}/noticias`, config)
             .catch(err => {
                 dispatch(setMessage({
                     title: 'Erro',

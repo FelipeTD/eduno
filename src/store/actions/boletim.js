@@ -1,5 +1,6 @@
 import { ATUALIZA_ETAPA, SET_ETAPA } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const atualizaEtapa = etapa => {
@@ -35,7 +36,7 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
         //     title: 'Sucess',
         //     text: filhos[id].numEtapas.toString()
         // }))
-        axios.get(`http://eduno.com.br:4827/nota/${data}/${codcurso}/${codserie}/${codturma}
+        axios.get(`${baseUrl}/nota/${data}/${codcurso}/${codserie}/${codturma}
                     /${ra}/${numeroEtapa}`, config)
             .catch(err => {
                 dispatch(setMessage({
@@ -80,7 +81,7 @@ export const fetchNotas = (token, filhos, id) => {
 
     return dispatch => {
 
-        axios.get(`http://eduno.com.br:4827/nota/${data}/${codcurso}/${codserie}/${codturma}
+        axios.get(`${baseUrl}/nota/${data}/${codcurso}/${codserie}/${codturma}
                     /${ra}/${etapa_atual}`, config)
             .catch(err => {
                 dispatch(setMessage({

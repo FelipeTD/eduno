@@ -1,5 +1,6 @@
 import { SET_NOTICIA_DETALHADA } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 import { Alert } from 'react-native'
 
@@ -22,7 +23,7 @@ export const fetchNoticiaDetalhada = (requestNoticia, token) => {
         //     title: 'Sucess',
         //     text: 'Tortora'
         // }))
-        axios.get(`http://eduno.com.br:4827/noticia/${requestNoticia.ident}`, config)
+        axios.get(`${baseUrl}/noticia/${requestNoticia.ident}`, config)
             .catch(err => {
                 dispatch(setMessage({
                     title: 'Erro',

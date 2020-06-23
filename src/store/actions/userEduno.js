@@ -6,9 +6,8 @@ import {
     ATUALIZA_ID
 } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
-
-const authBaseURL = 'http://eduno.com.br:4827'
 
 export const userLoggedEduno = userEduno => {
     return {
@@ -45,7 +44,7 @@ export const setID = userEduno => {
 export const loginEduno = userEduno => {
     return dispatch => {
         dispatch(loadingUserEduno())
-        axios.post(`${authBaseURL}/login`, {
+        axios.post(`${baseUrl}/login`, {
             user: userEduno.user,
             pwd: userEduno.pwd,
             device: userEduno.device,
@@ -76,7 +75,7 @@ export const loginEduno = userEduno => {
                         headers: {'x-access-token': res.data.token,
                                   'x-device-id': '12931293128'}
                     };
-                    axios.get('http://eduno.com.br:4827/inicio', config)
+                    axios.get(`${baseUrl}/inicio`, config)
                         .catch(err => {
                             dispatch(setMessage({
                                 title: 'Erro',

@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     Dimensions,
-    ScrollView 
+    ScrollView,
+    Platform 
 } from 'react-native'
 import { fetchNoticiaDetalhada } from '../store/actions/noticiaDetalhada'
 import { connect } from 'react-redux'

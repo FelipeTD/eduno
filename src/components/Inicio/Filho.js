@@ -4,7 +4,8 @@ import {
     View,
     Dimensions,
     Text,
-    Image
+    Image,
+    Platform
 } from 'react-native'
 
 class Filho extends Component {

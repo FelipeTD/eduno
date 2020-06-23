@@ -1,9 +1,9 @@
 export const mockLogin = [
     {
         user: 'janio.kaizer@hotmail.com',
-        pwd: '703332',
+        pwd: 'm4G|call',
         empre: 'EBA',
-        device: '13423433',
+        device: '1234567890',
     },
     {
         user: 'SADSONVIANA@HOMAIL.COM',

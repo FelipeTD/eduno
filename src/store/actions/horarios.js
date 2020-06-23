@@ -1,5 +1,6 @@
 import { ATUALIZA_HORARIOS, SET_HORARIOS } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const atualizaHorarios = quadro => {
@@ -30,7 +31,7 @@ export const refreshHorarios = (quadroRequest, filhos, token, id) => {
     };
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/horario/${data}/${codcurso}/${codserie}/${codturma}/`, 
+        axios.get(`${baseUrl}/horario/${data}/${codcurso}/${codserie}/${codturma}/`, 
                     config)
             .catch(err => {
                 dispatch(setMessage({
@@ -76,7 +77,7 @@ export const fetchHorarios = (token, filhos, id) => {
     const codturma = filhos[id].codturma.toString()
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/horario/${data}/${codcurso}/${codserie}/${codturma}/`,
+        axios.get(`${baseUrl}/horario/${data}/${codcurso}/${codserie}/${codturma}/`,
                     config)
             .catch(err => {
                 dispatch(setMessage({

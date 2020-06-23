@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Dimensions,
-    Text
+    Text,
+    Platform
 } from 'react-native'
 import { formataDisciplina } from '../../functions/formatador'
 

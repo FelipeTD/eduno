@@ -1,5 +1,6 @@
 import { ATUALIZA_EVENTOS, SET_EVENTOS } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const atualizaEventos = eventos => {
@@ -36,7 +37,7 @@ export const fetchEventos = (token, filhos, id) => {
     const data = filhos[id].ano.toString()
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/evento/${data}`, config)
+        axios.get(`${baseUrl}/evento/${data}`, config)
             .catch(err => {
                 if (err.response.status === 400) {
                     const eventoObjeto = {
@@ -121,7 +122,7 @@ export const refreshEventos = (mes, ano, token) => {
     }
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/evento/${ano}`, config)
+        axios.get(`${baseUrl}/evento/${ano}`, config)
             .catch(err => {
                 if (err.response.status === 400) {
                     const eventoObjeto = {

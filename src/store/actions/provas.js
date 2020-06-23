@@ -1,5 +1,6 @@
 import { SET_PROVAS, ATUALIZA_PROVAS } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const atualizaProvas = provas => {
@@ -35,7 +36,7 @@ export const fetchProvas = (token, filhos, id) => {
     const ra = filhos[id].ra.toString()
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/prova/${data}/${codcurso}/${codserie}/${codturma}
+        axios.get(`${baseUrl}/prova/${data}/${codcurso}/${codserie}/${codturma}
                     /${ra}/${ano}-${mesFormatado}`, config)
             .catch(err => {
                 if (err.response.status === 400) {
@@ -100,7 +101,7 @@ export const refreshProvas = (mes, ano, token, filhos, id) => {
 
     return dispatch => {
 
-        axios.get(`http://eduno.com.br:4827/prova/${data}/${codcurso}/${codserie}/${codturma}
+        axios.get(`${baseUrl}/prova/${data}/${codcurso}/${codserie}/${codturma}
                     /${ra}/${ano}-${mes}`, config)
             .catch(err => {
                 if (err.response.status === 400) {

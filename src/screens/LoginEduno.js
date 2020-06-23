@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2C2D3F',
     height: 40,
     borderWidth: 1,
-    borderColor: '2C2D3F',
+    borderColor: '#2C2D3F',
     borderBottomColor: '#808080',
     fontFamily: 'Montserrat',
     color: '#FFFFFF'

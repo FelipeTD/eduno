@@ -1,5 +1,6 @@
 import { ATUALIZA_TAREFA, SET_TAREFAS } from './actionTypes'
 import { setMessage } from './message'
+import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
 
 export const atualizaTarefa = tarefa => {
@@ -31,7 +32,7 @@ export const refreshTarefas = (requestTarefas, filhos, token, id) => {
 
     return dispatch => {
 
-        axios.get(`http://eduno.com.br:4827/tarefa/${data}/${codcurso}/${codserie}/${codturma}
+        axios.get(`${baseUrl}/tarefa/${data}/${codcurso}/${codserie}/${codturma}
                     /1`, config)
             .catch(err => {
                 if (err.response.status === 400) {
@@ -93,7 +94,7 @@ export const fetchTarefas = (token, filhos, id) => {
     const codturma = filhos[id].codturma.toString()
 
     return dispatch => {
-        axios.get(`http://eduno.com.br:4827/tarefa/${data}/${codcurso}/${codserie}/${codturma}/1`,
+        axios.get(`${baseUrl}/tarefa/${data}/${codcurso}/${codserie}/${codturma}/1`,
                      config)
             .catch(err => {
                 dispatch(setMessage({

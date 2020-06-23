@@ -7,6 +7,7 @@ import {
     Text,
     Dimensions,
     TouchableOpacity,
+    Platform,
     Alert
 } from 'react-native'
 import Horario from '../components/Horarios/Horario'
