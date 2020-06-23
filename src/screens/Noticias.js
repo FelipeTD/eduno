@@ -122,14 +122,12 @@ const styles = StyleSheet.create({
     data: {
         width: Dimensions.get('window').width * 70 / 100,
         height: 20,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#000'
     },
     link: {
         width: Dimensions.get('window').width * 25 / 100,
         height: 20,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#000'
     },
@@ -159,7 +157,6 @@ const styles = StyleSheet.create({
         color: '#000',
         height: 100,
         fontSize: 14,
-        resizeMode: 'contain',
         width: Dimensions.get('window').width * 7 / 10,
         paddingLeft: 10,
         paddingRight: 10,
@@ -169,14 +166,12 @@ const styles = StyleSheet.create({
     dataSecundario: {
         width: Dimensions.get('window').width * 70 / 100,
         height: 20,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#000'
     },
     linkSecundario: {
         width: Dimensions.get('window').width * 25 / 100,
         height: 20,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#000'
     }

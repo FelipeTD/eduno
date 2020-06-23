@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     disciplina: {
         width: Dimensions.get('window').width * 45 / 100,
         height: 30,
-        resizeMode: 'contain',
         color: '#BEF5FE',
         fontFamily: 'Montserrat',
         paddingLeft: 10,
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
     horario: {
         width: Dimensions.get('window').width * 17 / 100,
         height: 30,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
         paddingBottom: 10
@@ -56,7 +54,6 @@ const styles = StyleSheet.create({
     professor: {
         width: Dimensions.get('window').width * 38 / 100,
         height: 30,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
         paddingBottom: 10

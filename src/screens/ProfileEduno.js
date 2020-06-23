@@ -516,15 +516,12 @@ const styles = StyleSheet.create({
     image: {
         width: Dimensions.get('window').width * 20 / 100,
         height: Dimensions.get('window').width * 20 / 100,
-        // marginTop: 10,
         resizeMode: 'contain',
         borderRadius: Dimensions.get('window').width * 10 / 100,
-        // backgroundColor: 'red'
     },
     nickname: {
         width: Dimensions.get('window').width * 50 / 100,
         height: 20,
-        resizeMode: 'contain',
         color: '#BEF5FE',
         fontFamily: 'Montserrat',
         paddingLeft: 20

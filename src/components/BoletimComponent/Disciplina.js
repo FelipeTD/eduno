@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     disciplina: {
         width: Dimensions.get('window').width * 1 / 2,
         height: 30,
-        resizeMode: 'contain',
         color: '#BEF5FE',
         fontFamily: 'Montserrat',
         paddingLeft: 30,
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
     notas: {
         width: Dimensions.get('window').width * 1 / 4,
         height: 30,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
         paddingBottom: 10
@@ -56,7 +54,6 @@ const styles = StyleSheet.create({
     faltas: {
         width: Dimensions.get('window').width * 1 / 4,
         height: 30,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF',
         paddingBottom: 10

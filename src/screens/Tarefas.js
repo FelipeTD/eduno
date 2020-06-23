@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     subtitulo: {
         width: Dimensions.get('window').width,
         height: 20,
-        resizeMode: 'contain',
         color: '#F5FCFF',
         fontFamily: 'Montserrat',
         paddingLeft: 40
@@ -180,7 +179,6 @@ const styles = StyleSheet.create({
     disciplina: {
         width: Dimensions.get('window').width * 3 / 4,
         height: 20,
-        resizeMode: 'contain',
         color: '#F5FCFF',
         fontFamily: 'Montserrat',
         paddingLeft: 10
@@ -188,7 +186,6 @@ const styles = StyleSheet.create({
     link: {
         width: Dimensions.get('window').width * 1 / 4,
         height: 20,
-        resizeMode: 'contain',
         fontFamily: 'Montserrat',
         color: '#F5FCFF'
     },

@@ -71,13 +71,11 @@ const styles = StyleSheet.create({
     icon: {
         color: "#BEF5FE",
         marginLeft: Dimensions.get('window').width * 10 / 100,
-        resizeMode: 'contain',
         width: Dimensions.get('window').width * 3 / 10
     },
     description: {
         fontFamily: 'Montserrat',
         color: '#FFF',
-        resizeMode: 'contain',
         fontSize: 20
     }
 })

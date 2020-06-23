@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     disciplina: {
         width: Dimensions.get('window').width * 1 / 2,
         height: 20,
-        resizeMode: 'contain',
         color: '#F5FCFF',
         fontWeight: 'bold',
         fontFamily: 'Montserrat',
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
     notas: {
         width: Dimensions.get('window').width * 1 / 4,
         height: 20,
-        resizeMode: 'contain',
         color: '#F5FCFF',
         fontFamily: 'Montserrat',
         fontWeight: 'bold',
@@ -130,7 +128,6 @@ const styles = StyleSheet.create({
     faltas: {
         width: Dimensions.get('window').width * 1 / 4,
         height: 20,
-        resizeMode: 'contain',
         color: '#F5FCFF',
         fontFamily: 'Montserrat',
         fontWeight: 'bold',
@@ -148,13 +145,11 @@ const styles = StyleSheet.create({
     containerTitle: {
         marginTop: Platform.OS === 'ios' ? 20 : 0,
         padding: 10,
-        fontFamily: 'Montserrat',
         width: '100%'
     },
     valorEtapa: {
         width: Dimensions.get('window').width,
         height: 40,
-        resizeMode: 'contain',
         color: '#BEF5FE',
         fontFamily: 'Montserrat',
         paddingLeft: 80,
