@@ -28,7 +28,7 @@ class NoticiaDetalhada extends Component {
                <View style={styles.rowContainer}>
                     <Text style={styles.title}>{this.props.sinop}</Text> 
                </View>
-               <ScrollView style={styles.rowContainer} contentContainerStyle={styles.contentContainer}>
+               <ScrollView style={styles.scrollContainer}>
                     <Text style={styles.detalhes}>{this.props.detlh}</Text> 
                </ScrollView>
             </View>
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#FFF'
     },
+    scrollContainer: {
+        flexDirection: 'row'
+    },
     rowContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    contentContainer: {
-        marginTop: 40
     },
     image: {
         height: Dimensions.get('window').width * 1 / 3,
