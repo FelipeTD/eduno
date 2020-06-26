@@ -2,6 +2,7 @@ import { ATUALIZA_ETAPA, SET_ETAPA } from './actionTypes'
 import { setMessage } from './message'
 import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
+import { Alert } from 'react-native'
 
 export const atualizaEtapa = etapa => {
     return {
@@ -19,12 +20,30 @@ export const setNotas = etapa => {
 
 export const refreshNotas = (requestNotas, filhos, token, id) => {
 
-    const numeroEtapa = requestNotas.numeroEtapa
+    let numeroEtapa = requestNotas.numeroEtapa
     const data = filhos[id].ano.toString()
     const codcurso = filhos[id].codcurso.toString()
     const codserie = filhos[id].codserie.toString()
     const codturma = filhos[id].codturma.toString()
     const ra = filhos[id].ra.toString()
+    const operacao = requestNotas.operacao
+    const numEtapas = filhos[id].numEtapas
+
+    if (operacao == 'adicionar') {
+        if ((numEtapas == 4 && numeroEtapa == 4) || (numEtapas == 3 && numeroEtapa == 3)) {
+            numeroEtapa = 0
+        }
+        numeroEtapa = parseInt(numeroEtapa) + 1
+    } else if (operacao == 'subtrair') {
+        if (numEtapas == 4 && numeroEtapa == 1) {
+            numeroEtapa = 5
+        } else if (numEtapas == 3 && numeroEtapa == 1) {
+            numeroEtapa = 4
+        }
+        numeroEtapa = parseInt(numeroEtapa) - 1
+    }
+
+    let descricao = numeroEtapa + 'º etapa'
 
     var config = {
         headers: {'x-access-token': token,
@@ -34,7 +53,7 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
     return dispatch => {
         // dispatch(setMessage({
         //     title: 'Sucess',
-        //     text: filhos[id].numEtapas.toString()
+        //     text: operacao.toString()
         // }))
         axios.get(`${baseUrl}/nota/${data}/${codcurso}/${codserie}/${codturma}
                     /${ra}/${numeroEtapa}`, config)
@@ -55,8 +74,8 @@ export const refreshNotas = (requestNotas, filhos, token, id) => {
                     })
                 }
                 const etapa = {
-                    numeroEtapa: requestNotas.numeroEtapa,
-                    descricao: requestNotas.descricao,
+                    numeroEtapa: numeroEtapa,
+                    descricao: descricao,
                     valor: valor,
                     notas: notas
                 }

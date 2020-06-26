@@ -1,6 +1,7 @@
 import { ATUALIZA_ETAPA, SET_ETAPA } from '../actions/actionTypes'
 
 const initialState = {
+    operacao: '',
     numeroEtapa: 1,
     descricao: '1º etapa',
     valor: 0,
@@ -12,6 +13,7 @@ const reducer = (state = initialState, action) => {
         case ATUALIZA_ETAPA:
             return {
                 ...state,
+                operacao: action.payload.operacao,
                 numeroEtapa: action.payload.numeroEtapa,
                 descricao: action.payload.descricao,
                 valor: action.payload.valor,
@@ -20,6 +22,7 @@ const reducer = (state = initialState, action) => {
         case SET_ETAPA:
             return {
                 ...state,
+                operacao: action.payload.operacao,
                 numeroEtapa: action.payload.numeroEtapa,
                 descricao: action.payload.descricao,
                 valor: action.payload.valor,

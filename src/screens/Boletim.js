@@ -16,50 +16,26 @@ import { fetchNotas, refreshNotas } from '../store/actions/boletim'
 
 class Boletim extends Component {
 
-    state = {
-        identificador: this.props.id
-    }
-
-    atualizarBoletim = () => {
-        this.props.descricao = this.props.numeroEtapa + 'º etapa'
+    atualizaSetaDireita = () => {
         this.props.onAtualizaEtapa({
+            operacao: 'adicionar',
             numeroEtapa: this.props.numeroEtapa,
             descricao: this.props.descricao,
             notas: []
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
-    atualizaSetaDireita = () => {
-        if ((this.props.filhos[this.props.id].numEtapas == 4 && this.props.numeroEtapa == 4)
-            || (this.props.filhos[this.props.id].numEtapas == 3 && this.props.numeroEtapa == 3)) {
-            this.props.numeroEtapa = 0
-        }
-        this.props.numeroEtapa = parseInt(this.props.numeroEtapa) + 1
-        this.atualizarBoletim()
-    }
-
     atualizaSetaEsquerda = () => {
-        if (this.props.filhos[this.props.id].numEtapas == 4 && this.props.numeroEtapa == 1) {
-            this.props.numeroEtapa = 5
-        } else if (this.props.filhos[this.props.id].numEtapas == 3 && this.props.numeroEtapa == 1) {
-            this.props.numeroEtapa = 4
-        }
-        this.props.numeroEtapa = parseInt(this.props.numeroEtapa) - 1
-        this.atualizarBoletim()
+        this.props.onAtualizaEtapa({
+            operacao: 'subtrair',
+            numeroEtapa: this.props.numeroEtapa,
+            descricao: this.props.descricao,
+            notas: []
+        }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
     componentDidMount = () => {
         this.props.onFetchNotas(this.props.token.toString(), this.props.filhos, this.props.id)
-        this.state.identificador = -1
-    }
-
-    componentDidUpdate = () => {
-        if (this.state.identificador != this.props.id) {
-            if (this.props.token != null) {
-                this.props.onFetchNotas(this.props.token.toString(), this.props.filhos, this.props.id)
-                this.state.identificador = this.props.id
-            }
-        }
     }
 
     render() {
@@ -159,6 +135,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({etapa, userEduno}) => {
     return {
+        operacao: etapa.operacao,
         numeroEtapa: etapa.numeroEtapa,
         descricao: etapa.descricao,
         valor: etapa.valor,
