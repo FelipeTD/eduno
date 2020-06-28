@@ -2,6 +2,8 @@ import { ATUALIZA_HORARIOS, SET_HORARIOS } from './actionTypes'
 import { setMessage } from './message'
 import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
+import { Alert } from 'react-native'
+import { diasDaSemana } from '../../Enums/dateUtil'
 
 export const atualizaHorarios = quadro => {
     return {
@@ -19,16 +21,34 @@ export const setHorarios = quadro => {
 
 export const refreshHorarios = (quadroRequest, filhos, token, id) => {
 
-    const dia = quadroRequest.dia
+    let dia = quadroRequest.dia
     const data = filhos[id].ano.toString()
     const codcurso = filhos[id].codcurso.toString()
     const codserie = filhos[id].codserie.toString()
     const codturma = filhos[id].codturma.toString()
+    let diaDaSemana = ''
 
     var config = {
         headers: {'x-access-token': token,
                   'x-device-id': '12931293128'}
     };
+
+    if (quadroRequest.operacao == 'adicionar') {
+        if (dia == 1) {
+            dia = 2
+        }
+        if (dia == 6) {
+            dia = 1
+        }
+        dia = dia + 1
+    } else if (quadroRequest.operacao == 'subtrair') {
+        if (dia == 2 || dia == 1) {
+            dia = 7
+        }
+        dia = dia - 1
+    }
+
+    diaDaSemana = diasDaSemana[dia - 2]
 
     return dispatch => {
         axios.get(`${baseUrl}/horario/${data}/${codcurso}/${codserie}/${codturma}/`, 
@@ -54,7 +74,7 @@ export const refreshHorarios = (quadroRequest, filhos, token, id) => {
 
                 const quadro = {
                     dia: dia,
-                    diaDaSemana: quadroRequest.diaDaSemana,
+                    diaDaSemana: diaDaSemana,
                     horarios: horarios
                 }
 

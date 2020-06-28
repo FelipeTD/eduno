@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({etapa, userEduno}) => {
     return {
-        operacao: etapa.operacao,
         numeroEtapa: etapa.numeroEtapa,
         descricao: etapa.descricao,
         valor: etapa.valor,

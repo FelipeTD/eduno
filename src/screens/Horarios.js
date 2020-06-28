@@ -13,54 +13,29 @@ import {
 import Horario from '../components/Horarios/Horario'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { fetchHorarios, refreshHorarios } from '../store/actions/horarios'
-import { diasDaSemana } from '../Enums/dateUtil'
 
 class Horarios extends Component {
 
-    state = {
-        identificador: this.props.id
-    }
-
-    atualizarHorarios = () => {
-        this.props.diaDaSemana = diasDaSemana[this.props.dia - 2]
+    atualizaSetaDireita = () => {
         this.props.onAtualizaHorarios({
+            operacao: 'adicionar',
             dia: this.props.dia,
             diaDaSemana: this.props.diaDaSemana,
             horarios: []
         }, this.props.filhos, this.props.token.toString(), this.props.id)
-    } 
-
-    atualizaSetaDireita = () => {
-        if (this.props.dia == 1) {
-            this.props.dia = 2
-        }
-        if (this.props.dia == 6) {
-            this.props.dia = 1
-        }
-        this.props.dia = this.props.dia + 1
-        this.atualizarHorarios()
     }
 
     atualizaSetaEsquerda = () => {
-        if (this.props.dia == 2 || this.props.dia == 1) {
-            this.props.dia = 7
-        }
-        this.props.dia = this.props.dia - 1
-        this.atualizarHorarios()
+        this.props.onAtualizaHorarios({
+            operacao: 'subtrair',
+            dia: this.props.dia,
+            diaDaSemana: this.props.diaDaSemana,
+            horarios: []
+        }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
     componentDidMount = () => {
-        this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)
-        this.state.identificador = -1
-    }
-
-    componentDidUpdate = () => {
-        if (this.state.identificador != this.props.id) {
-            if (this.props.token != null) {
-                this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)
-                this.state.identificador = this.props.id
-            }
-        }
+        this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)        
     }
 
     render() {
