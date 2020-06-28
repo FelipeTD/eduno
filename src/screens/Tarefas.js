@@ -16,51 +16,28 @@ import { formataData, formataDataParaExibicao } from '../functions/formatador'
 
 class Tarefas extends Component {
 
-    state = {
-        identificador: this.props.id
-    }
-
     atualizaSetaDireita = () => {
-        const limite = this.props.tarefas.length - 1
-        if (this.props.numeroEtapaTarefa == limite) {
-            this.props.numeroEtapaTarefa = 0
-        } else {
-            this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa + 1
-        }
         this.props.onAtualizaDataTarefa({
+            operacao: 'adicionar',
             numeroEtapaTarefa: this.props.numeroEtapaTarefa,
             data: this.props.data,
-            tarefas: [],
-            tarefaAtual: []
+            tarefas: this.props.tarefas,
+            tarefaAtual: this.props.tarefaAtual
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
     atualizaSetaEsquerda = () => {
-        if (this.props.numeroEtapaTarefa == 0) {
-            this.props.numeroEtapaTarefa = this.props.tarefas.length - 1
-        } else {
-            this.props.numeroEtapaTarefa = this.props.numeroEtapaTarefa - 1
-        }
         this.props.onAtualizaDataTarefa({
+            operacao: 'subtrair',
             numeroEtapaTarefa: this.props.numeroEtapaTarefa,
             data: this.props.data,
-            tarefas: [],
-            tarefaAtual: []
+            tarefas: this.props.tarefas,
+            tarefaAtual: this.props.tarefaAtual
         }, this.props.filhos, this.props.token.toString(), this.props.id)
     }
 
     componentDidMount = () => {
         this.props.onFetchTarefas(this.props.token.toString(), this.props.filhos, this.props.id)
-        this.state.identificador = -1
-    }
-
-    componentDidUpdate = () => {
-        if (this.state.identificador != this.props.id) {
-            if (this.props.token != null) {
-                this.props.onFetchTarefas(this.props.token.toString(), this.props.filhos, this.props.id)
-                this.state.identificador = this.props.id
-            }
-        }
     }
 
     render() {

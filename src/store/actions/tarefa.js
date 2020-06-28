@@ -2,6 +2,7 @@ import { ATUALIZA_TAREFA, SET_TAREFAS } from './actionTypes'
 import { setMessage } from './message'
 import { baseUrl } from '../../Enums/Api'
 import axios from 'axios'
+import { Alert } from 'react-native'
 
 export const atualizaTarefa = tarefa => {
     return {
@@ -19,7 +20,7 @@ export const setTarefas = tarefaObjeto => {
 
 export const refreshTarefas = (requestTarefas, filhos, token, id) => {
 
-    const numeroEtapaTarefa = requestTarefas.numeroEtapaTarefa
+    let numeroEtapaTarefa = requestTarefas.numeroEtapaTarefa
     const data = filhos[id].ano.toString()
     const codcurso = filhos[id].codcurso.toString()
     const codserie = filhos[id].codserie.toString()
@@ -29,6 +30,21 @@ export const refreshTarefas = (requestTarefas, filhos, token, id) => {
         headers: {'x-access-token': token,
                   'x-device-id': '12931293128'}
     };
+
+    if (requestTarefas.operacao == 'adicionar') {
+        const limite = requestTarefas.tarefas.length - 1
+        if (numeroEtapaTarefa == limite) {
+            numeroEtapaTarefa = 0
+        } else {
+            numeroEtapaTarefa = numeroEtapaTarefa + 1
+        }
+    } else if (requestTarefas.operacao == 'subtrair') {
+        if (numeroEtapaTarefa == 0) {
+            numeroEtapaTarefa = requestTarefas.tarefas.length - 1
+        } else {
+            numeroEtapaTarefa = numeroEtapaTarefa - 1
+        }
+    }
 
     return dispatch => {
 
