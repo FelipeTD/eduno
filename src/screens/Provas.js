@@ -22,7 +22,8 @@ class Provas extends Component {
     diaDaSemanaReduzido: '',
     diaDoMes: '',
     provas: [],
-    datas: []
+    datas: [],
+    identificador: this.props.id
   }
 
   constructor(props) {
@@ -103,6 +104,16 @@ class Provas extends Component {
   componentDidMount = () => {
     this.props.onFetchProvas(this.props.token.toString(), this.props.filhos, this.props.id)
     this.carregarInformacoesDiaAtual(new Date())
+    this.state.identificador = -1   
+  }
+
+  componentDidUpdate = () => {
+    if (this.state.identificador != this.props.id) {
+        if (this.props.token != null) {
+            this.props.onFetchProvas(this.props.token.toString(), this.props.filhos, this.props.id)
+            this.state.identificador = this.props.id
+        }
+    }
   }
 
   render() {

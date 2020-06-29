@@ -16,6 +16,10 @@ import { fetchHorarios, refreshHorarios } from '../store/actions/horarios'
 
 class Horarios extends Component {
 
+    state = {
+        identificador: this.props.id
+    }
+
     atualizaSetaDireita = () => {
         this.props.onAtualizaHorarios({
             operacao: 'adicionar',
@@ -35,7 +39,17 @@ class Horarios extends Component {
     }
 
     componentDidMount = () => {
-        this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)        
+        this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)  
+        this.state.identificador = -1      
+    }
+
+    componentDidUpdate = () => {
+        if (this.state.identificador != this.props.id) {
+            if (this.props.token != null) {
+                this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id) 
+                this.state.identificador = this.props.id
+            }
+        }
     }
 
     render() {

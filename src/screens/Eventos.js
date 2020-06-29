@@ -23,7 +23,8 @@ class Eventos extends Component {
     diaDaSemanaReduzido: '',
     diaDoMes: '',
     eventos: [],
-    datas: []
+    datas: [],
+    identificador: this.props.id
   }
 
   constructor(props) {
@@ -101,6 +102,16 @@ class Eventos extends Component {
   componentDidMount = () => {
     this.props.onFetchEventos(this.props.token.toString(), this.props.filhos, this.props.id)
     this.carregarInformacoesDiaAtual(new Date())
+    this.state.identificador = -1
+  }
+
+  componentDidUpdate = () => {
+    if (this.state.identificador != this.props.id) {
+        if (this.props.token != null) {
+            this.props.onFetchEventos(this.props.token.toString(), this.props.filhos, this.props.id)
+            this.state.identificador = this.props.id
+        }
+    }
   }
 
   render() {

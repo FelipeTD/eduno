@@ -16,6 +16,10 @@ import { formataData, formataDataParaExibicao } from '../functions/formatador'
 
 class Tarefas extends Component {
 
+    state = {
+        identificador: this.props.id
+    }
+
     atualizaSetaDireita = () => {
         this.props.onAtualizaDataTarefa({
             operacao: 'adicionar',
@@ -38,6 +42,16 @@ class Tarefas extends Component {
 
     componentDidMount = () => {
         this.props.onFetchTarefas(this.props.token.toString(), this.props.filhos, this.props.id)
+        this.state.identificador = -1
+    }
+
+    componentDidUpdate = () => {
+        if (this.state.identificador != this.props.id) {
+            if (this.props.token != null) {
+                this.props.onFetchTarefas(this.props.token.toString(), this.props.filhos, this.props.id)
+                this.state.identificador = this.props.id
+            }
+        }
     }
 
     render() {
