@@ -7,6 +7,7 @@ import {
   Dimensions, 
   TouchableOpacity, 
   TextInput,
+  Alert,
 } 
 from 'react-native'
 import { connect } from 'react-redux'

@@ -8,6 +8,7 @@ import { fetchEventos } from '../store/actions/eventos'
 import { fetchNotas } from '../store/actions/boletim'
 import { fetchTarefas } from '../store/actions/tarefa'
 import { fetchHorarios } from '../store/actions/horarios'
+import { formataImagem } from '../functions/formatador'
 import { 
     View, 
     Text, 
@@ -30,6 +31,11 @@ class ProfileEduno extends Component {
         this.props.onFetchHorarios(this.props.token.toString(), this.props.filhos, this.props.id)
     }
 
+    logoutEduno = () => {
+        this.props.onLogoutEduno()
+        this.props.navigation.navigate('Auth')
+    }
+
     formata_nome(nome) {
         const nomes = nome.toString().split(" ")
         let nome_formatado = nomes[0]
@@ -47,11 +53,6 @@ class ProfileEduno extends Component {
         }
 
         return nome_formatado
-    }
-
-    logoutEduno = () => {
-        this.props.onLogoutEduno()
-        this.props.navigation.navigate('Auth')
     }
 
     noticias1 = () => {
@@ -119,11 +120,6 @@ class ProfileEduno extends Component {
         this.props.navigation.navigate('MenuPrincipal')
     }
 
-    formataImagem(foto) {
-        const base64 = 'data:image/png;base64,' + foto
-        return base64
-    }
-
     renderUnique = () => {
         if (this.props.filhos.length === 1) {
             if (this.props.filhos[0].perfil.toString() === 'ALUNO') {
@@ -131,7 +127,7 @@ class ProfileEduno extends Component {
                     <View style={styles.container}>
                         <TouchableOpacity onPress={this.noticias1}
                             style={styles.buttom}>
-                            <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}
+                            <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}
                                 style={styles.image} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.noticias1}
@@ -164,7 +160,7 @@ class ProfileEduno extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={this.noticias1}
                                     style={styles.buttom}>
-                                    <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}  
+                                    <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}  
                                             style={styles.image} />
                                 </TouchableOpacity>
                             </View>
@@ -194,7 +190,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias1}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -209,7 +205,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias2}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[1].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[1].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -238,7 +234,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias1}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -253,7 +249,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias2}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[1].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[1].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -268,7 +264,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias3}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[2].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[2].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -297,7 +293,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias1}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -312,7 +308,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias2}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[1].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[1].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -327,7 +323,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias3}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[2].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[2].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -342,7 +338,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias4}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[3].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[3].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -371,7 +367,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias1}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[0].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[0].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -386,7 +382,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias2}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[1].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[1].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -401,7 +397,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias3}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[2].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[2].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -416,7 +412,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias4}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[3].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[3].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>
@@ -431,7 +427,7 @@ class ProfileEduno extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.noticias5}
                                 style={styles.buttom}>
-                                <Image source={{uri: this.formataImagem(this.props.filhos[4].foto)}}  
+                                <Image source={{uri: formataImagem(this.props.filhos[4].foto)}}  
                                         style={styles.image} />
                             </TouchableOpacity>
                         </View>

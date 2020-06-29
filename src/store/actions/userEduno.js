@@ -50,61 +50,60 @@ export const loginEduno = userEduno => {
             device: userEduno.device,
             empre: userEduno.empre
         })
-            .catch(err => {
-                if (err.response.status === 400) {
-                    delete userEduno.pwd
-                    dispatch(setMessage({
-                        title: 'Erro',
-                        text: 'Usuário ou senha incorretos'
-                    }))
-                } else {
-                    dispatch(setMessage({
-                        title: 'Erro',
-                        text: err.response.status
-                    }))
-                }
-            })
-            .then(res => {
-                if (res.data.rc.toString() === '00') {
-                    userEduno.token = res.data.token
-                    userEduno.nome = res.data.nome
-                    userEduno.email = res.data.email
-                    delete userEduno.pwd
+        .then(res => {
+            if (res.data.rc.toString() === '00') {
+                userEduno.token = res.data.token
+                userEduno.nome = res.data.nome
+                userEduno.email = res.data.email
+                delete userEduno.pwd
 
-                    var config = {
-                        headers: {'x-access-token': res.data.token,
-                                  'x-device-id': '12931293128'}
-                    };
-                    axios.get(`${baseUrl}/inicio`, config)
-                        .catch(err => {
-                            dispatch(setMessage({
-                                title: 'Erro',
-                                text: err
-                            }))
-                        })
-                        .then(res => {
-                            const rawFilhos = res.data.filhos
-                            const filhos = []
-                            for (let key in rawFilhos) {
-                                filhos.push({
-                                    ...rawFilhos[key],
-                                    id: key
-                                })
-                            }
+                var config = {
+                    headers: {'x-access-token': res.data.token,
+                                'x-device-id': '12931293128'}
+                };
+                axios.get(`${baseUrl}/inicio`, config)
+                    .catch(err => {
+                        dispatch(setMessage({
+                            title: 'Erro',
+                            text: err
+                        }))
+                    })
+                    .then(res => {
+                        const rawFilhos = res.data.filhos
+                        const filhos = []
+                        for (let key in rawFilhos) {
+                            filhos.push({
+                                ...rawFilhos[key],
+                                id: key
+                            })
+                        }
 
-                            userEduno.filhos = filhos
-                            userEduno.id = 0
+                        userEduno.filhos = filhos
+                        userEduno.id = 0
 
-                            dispatch(userLoggedEduno(userEduno))
-                            dispatch(userLoadedEduno())
-
-                        })
-                } else {
-                    userEduno.token = '403'
-                    delete userEduno.pwd
-                    // dispatch(logoutEduno())
-                }
-            })
+                        dispatch(userLoggedEduno(userEduno))
+                        dispatch(userLoadedEduno())
+                    })
+            } else {
+                userEduno.token = '403'
+                delete userEduno.pwd
+            }
+        })
+        .catch(err => {
+            if (err.response.status === 400) {
+                delete userEduno.pwd
+                dispatch(setMessage({
+                    title: 'Erro',
+                    text: 'Usuário ou senha incorretos'
+                }))
+            } else {
+                delete userEduno.pwd
+                dispatch(setMessage({
+                    title: 'Erro',
+                    text: err.response.status
+                }))
+            }
+        })
     }
 }
 
