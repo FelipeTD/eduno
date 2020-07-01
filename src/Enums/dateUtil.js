@@ -6,7 +6,7 @@ export const diasDaSemana = [
     'Sexta'
 ]
 
-export const diasDaSemanaReduzido = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
+export const diasDaSemanaReduzido = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 
 export const localeDate = {
     monthNames: 

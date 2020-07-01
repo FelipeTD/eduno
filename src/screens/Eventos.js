@@ -43,9 +43,9 @@ class Eventos extends Component {
     this.state.eventos = []
     let data = new Date(day.dateString.toString())
     this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[data.getDay()].toString()
+    this.state.diaDoMes = data.getDate().toString()
     data.setDate(data.getDate() + 1)
     this.state.eventos.push(filtrarEventos(this.props.eventos, data))
-    this.state.diaDoMes = data.getDate().toString()
     this.setState({
       selected: day.dateString
     });

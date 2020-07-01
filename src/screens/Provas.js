@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Dimensions,
   View,
-  FlatList
+  FlatList,
+  Alert
 } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import { localeDate, diasDaSemanaReduzido } from '../Enums/dateUtil'
@@ -33,7 +34,14 @@ class Provas extends Component {
 
   carregarInformacoesDiaAtual(dataPadrao) {
     this.state.provas = []
-    this.state.provas.push(filtrarProvas(this.props.provas, dataPadrao))
+    const provasFiltradas = filtrarProvas(this.props.provas, dataPadrao)
+    if (provasFiltradas) {
+      for (let item of provasFiltradas) {
+        this.state.provas.push(item)
+      }
+    } else {
+      this.state.provas.push(filtrarProvas(this.props.provas, dataPadrao))
+    }
     this.state.diaDaSemanaReduzido = localeDate.dayNamesShort[dataPadrao.getDay()].toString()
     this.state.diaDoMes = dataPadrao.getDate().toString()
   }
@@ -42,9 +50,16 @@ class Provas extends Component {
     this.state.provas = []
     let data = new Date(day.dateString.toString())
     this.state.diaDaSemanaReduzido = diasDaSemanaReduzido[data.getDay()].toString()
-    data.setDate(data.getDate() + 1)
-    this.state.provas.push(filtrarProvas(this.props.provas, data))
     this.state.diaDoMes = data.getDate().toString()
+    data.setDate(data.getDate() + 1)
+    const provasFiltradas = filtrarProvas(this.props.provas, data)
+    if (provasFiltradas) {
+      for (let item of provasFiltradas) {
+        this.state.provas.push(item)
+      }
+    } else {
+      this.state.provas.push(filtrarProvas(this.props.provas, data))
+    }
     this.setState({
       selected: day.dateString
     });
@@ -57,14 +72,14 @@ class Provas extends Component {
           data={this.state.provas}
           keyExtractor={item => `${item.id}`}
           renderItem={({ item }) => 
-            <View style={styles.lista}>
+            <ScrollView style={styles.lista}>
               <Text style={styles.linha}>{item.atividade} - {item.disciplina}</Text>
               <Text style={styles.linha}>
                 Valor: {item.valor} - 
                 Nota: {item.nota}
               </Text>
               <Text style={styles.detalhe}>{item.detalhe}</Text>
-            </View>
+            </ScrollView>
           } 
         />
       )

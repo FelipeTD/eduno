@@ -34,16 +34,21 @@ export const filtrarEventos = (eventos, data) => {
 }
 
 export const filtrarProvas = (provas, data) => {
+  let retorno = []
   if (provas.length > 0) {
       for (let x = 0; x < provas.length; x++) {
           let dataFormatada = provas[x].data.toString().substring(0,10)
           let dataRetorno = new Date(dataFormatada)
           dataRetorno.setDate(dataRetorno.getDate() + 1)
           if (formateDate(data) === formateDate(dataRetorno)) {
-              return provas[x]
+              retorno.push(provas[x])
           }
       }
-      return null
+      if (retorno.length > 0) {
+        return retorno
+      } else {
+        return null
+      }
   } else {
       return null
   }
